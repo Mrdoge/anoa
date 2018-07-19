@@ -19,11 +19,14 @@
         <div id="tip" style="margin-top: 1rem; margin-bottom: 0.2rem; font-size: 0.26rem; display: none;"></div>
 
         <div id="allmap"></div>
+        <!-- <mapPicker v-show="false"></mapPicker> -->
     </div>
 </template>
 
 
 <script>
+import mapPicker from "@/components/mapPicker"
+
 var qs = require('qs');
 export default {
     name: 'signIndex',
@@ -50,9 +53,9 @@ export default {
     mounted(){
         var vm = this;
         setTimeout(() => {
-            //vm.getLocationByGaoDe()            //高德地图
+            vm.getLocationByGaoDe()            //高德地图
             //vm.getLocationByBaiDu()            //百度地图
-            vm.getLocationByTencent()           //腾讯地图
+            //vm.getLocationByTencent()           //腾讯地图
         },500);
     },
     destroyed(){
@@ -60,6 +63,7 @@ export default {
     },
     components:{
         //footerSign
+        mapPicker
     },
     methods:{
         getLocationByGaoDe(){
