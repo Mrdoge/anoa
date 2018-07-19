@@ -246,6 +246,7 @@ export default {
             }
         },
         getLocationByTencent(){
+            /*在家测试能不能提交*/
             var vm = this;
             var script = document.createElement("script");  
             //script.src = "https://map.qq.com/api/js?v=2.exp&key=URKBZ-BHWKG-M5LQQ-IMA7D-SOZGS-IZBJ4";       //URKBZ-BHWKG-M5LQQ-IMA7D-SOZGS-IZBJ4
