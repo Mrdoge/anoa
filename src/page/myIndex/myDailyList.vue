@@ -11,7 +11,7 @@
 				<div class="link">查看详情</div>
 			</router-link>
 		</div>
-		<loading :loadingShow="loadingData.loadingShow" :botLineShow="loadingData.botLineShow"></loading>
+		<loading :loadingShow="loadingData.loadingShow" :botLineShow="loadingData.botLineShow && list.length" :noDataShow="loadingData.noDataShow"></loading>
 	</div>
 </template>
 
@@ -77,6 +77,7 @@ export default {
 					var _data = data.retval.data;
 					if (!_data) { //如果返回空值
 						vm.list.splice(0,vm.list.length); //显示暂无数据
+						vm.loadingData.noDataShow = true
 						return false
 					}
 

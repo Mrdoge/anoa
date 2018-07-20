@@ -113,7 +113,9 @@ export default {
 
               //吧登陆信息写入缓存
               var userId = res.data.retval.userId;
+              var isAdmin = res.data.retval.isAdmin;
               localStorage.setItem('userId',userId)
+              localStorage.setItem('isAdmin',isAdmin)
               //vm.$store.state.isLogin = false
           }else{
               F['Hint'](vm,{

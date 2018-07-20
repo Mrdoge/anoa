@@ -115,7 +115,8 @@ export default {
                         type:1
                     })
 
-                    vm.$router.push('/daily/dailyIndex');
+                    vm.$router.push('/myIndex/myDailyList');
+                    //vm.$router.push('/daily/dailyIndex');
                     // setTimeout(() => {
                     //     vm.$router.push('/daily/dailyIndex');
                     // },1500)

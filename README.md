@@ -25,6 +25,9 @@ npm run e2e
 
 # run all tests
 npm test
+
+# 温馨提示
+config > index.js 里面的host已经改变
 ```
 
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).

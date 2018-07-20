@@ -149,6 +149,7 @@ export default {
                         window.location.reload();
                         vm.$router.push('/index/workIndex')
                         localStorage.setItem('userId','')   //清空userId
+                        localStorage.setItem('isAdmin','')   //清空isAdmin
                     },1000);
                 }else{
                     vm.F['Hint'](vm,{

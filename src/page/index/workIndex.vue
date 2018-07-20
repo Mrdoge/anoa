@@ -16,7 +16,7 @@
 						<i class="icon-daqiajilu icon"></i><br/>
 						打卡签到
 					</router-link>
-					<router-link :to="'/daily/dailyIndex'">
+					<router-link :to="(+isAdmin == 0)?'/daily/dailyAdd':'/daily/dailyIndex'">
 						<i class="icon-gongzuoribao icon s-pink"></i><br/>
 						工作日报
 					</router-link>
@@ -75,10 +75,14 @@ export default {
         },
         swiperSlides: []
       },
+      isAdmin:undefined    //是否超级管理员
     }
   },
   created(){
-   
+    var vm = this; 
+    //vm.isAdmin = localStorage.getItem('isAdmin');
+
+    vm.checkIsAdmin();
   },
   destroyed(){ //离开页面
     
@@ -88,7 +92,25 @@ export default {
     swiperSlide,
   },
   methods:{
-
+    checkIsAdmin(){
+      var vm = this;
+      if (localStorage.getItem('isAdmin')) {     //如果检测到缓存有值
+        vm.isAdmin = localStorage.getItem('isAdmin');
+        return false
+      }
+      var url = vm.$store.state.httpUrl.login.checkIsLogin;
+      vm.axios.post(url)
+        .then((res) => {
+          var data = res.data;
+          if (data.code == 1) {
+            vm.isAdmin = data.retval.isAdmin
+          }else{
+            vm.F['Hint'](vm,{
+              ct:data.msg
+            })
+          }
+        })
+    }
   }//methods
 }
 </script>
