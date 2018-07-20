@@ -50,9 +50,10 @@
 <script>
 var qs = require('qs');
 export default {
-    name: 'dailyAdd',
+    name: 'dailyDetails',
     data () {
         return {
+            daId:this.$route.params.daId,
             form:{
                 todayDesc:"",
                 tomorrowDesc:"",
@@ -63,6 +64,7 @@ export default {
     },
     created(){
         //console.log(this.$store.state.httpUrl.exampleImg)
+        this.getData();
     },
     destroyed(){
         this.$store.state.isShadeShow = false
@@ -107,7 +109,8 @@ export default {
             }
 
             vm.loading = true
-            vm.axios.post(vm.$store.state.httpUrl.daily.dailyAdd,qs.stringify(postData))
+            var url = vm.$store.state.httpUrl.daily.dailyAdd + '?id=' + vm.$route.params.daId
+            vm.axios.post(url,qs.stringify(postData))
             .then(function (res) {
                 if (res.data.code == 1) {
                     vm.F['Hint'](vm,{
@@ -133,6 +136,24 @@ export default {
             });
 
 
+        },
+        getData(){
+            var vm = this;
+            this.axios.post(this.$store.state.httpUrl.daily.dailyDetalis,qs.stringify({
+                daId:vm.daId
+            }))
+            .then(function (res) {
+                if(res.data.code == 1){
+                    const _data = res.data.retval.data[0];
+                    //console.log(_data);
+                    vm.form.todayDesc = _data.today_desc
+                    vm.form.tomorrowDesc = _data.tomorrow_desc
+                    vm.form.commentDesc = _data.comment_desc
+                }
+            })
+            .catch(function (err) {
+                console.log(err);
+            });
         }
     }
 }
@@ -141,7 +162,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .m-dailyWrap{}
-.m-write{margin-top:0.24rem;}
+.m-write{margin-top:0.24rem; }
 .m-write > .part{background-color: #fff;font-size: 0.26rem;padding-top: 0.28rem;padding-left: 0.32rem;color: #000;}
 .m-write > .part > .today{box-shadow: none; border:none;outline:none;width:7rem;height: 2.88rem;font-size: 0.26rem;}
 .m-write > .part > .line{height: 0.03rem;padding-left: 0.26rem;background-color: #e9e9e9;}

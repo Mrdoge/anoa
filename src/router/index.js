@@ -16,6 +16,7 @@ import infoDetail from '@/page/info/infoDetail'         //消息详情
 import dailyIndex from '@/page/daily/dailyIndex' //日报首页
 import dailyAdd from '@/page/daily/dailyAdd' //新增日报
 import dailyDetalis from '@/page/daily/dailyDetalis' //日报详情
+import dailyEdit from '@/page/daily/dailyEdit' //日报编辑
 
 //打卡模块
 import signIndex from '@/page/sign/signIndex' //打卡首页
@@ -186,6 +187,15 @@ export default new Router({
         title:"日报详情"
       },
       component: dailyDetalis
+    },
+    {
+      path: '/daily/dailyEdit/:daId',
+      name: 'dailyEdit',
+      meta:{
+        index:1.3,
+        title:"写日报"
+      },
+      component: dailyEdit
     },
 
     //打卡模块

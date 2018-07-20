@@ -13,15 +13,17 @@ name: 'mapPicker',
         }
     },
     created(){
-        (function(){
-            var iframe = document.getElementById('iframepage').contentWindow;
-            document.getElementById('iframepage').onload = function(){
-                iframe.postMessage('hello','https://m.amap.com/picker/');
-            };
-            window.addEventListener("message", function(e){
-                alert('您选择了:' + e.data.name + ',' + e.data.location)
-            }, false);
-        }())
+        // (function(){
+        //     var iframe = document.getElementById('iframepage').contentWindow;
+        //     document.getElementById('iframepage').onload = function(){
+        //         iframe.postMessage('hello','https://m.amap.com/picker/');
+        //     };
+        //     window.addEventListener("message", function(e){
+        //         console.log(123)
+        //         alert('您选择了:' + e.data.name + ',' + e.data.location)
+        //     }, false);
+        // }())
+
     }
 }
 </script>

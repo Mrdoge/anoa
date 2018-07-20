@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<div class="m-myDaily">
-			<router-link :to="'/daily/dailyDetalis/' + items.da_id" class="txt" v-for="(items,index) in list" :key="index">
+			<router-link :to="'/daily/dailyEdit/' + items.da_id" class="txt" v-for="(items,index) in list" :key="index">
 				<div class="time">{{items.created_time}}</div>
 				<div class="ct">
 					<div class="part f-txtof">今日工作：{{items.today_desc}}</div>

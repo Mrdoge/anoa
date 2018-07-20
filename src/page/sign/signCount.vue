@@ -239,7 +239,8 @@ export default {
 .m-select > .title{position: relative; cursor: pointer;}
 .m-select > .title:after{content:""; display: inline-block; border-top: 0.16rem solid #4f77aa; border-left: 0.08rem solid transparent; border-right: 0.08rem solid transparent; margin-left: 0.16rem; transition: all 0.4s ease;}
 .m-select > .ct{position: absolute; width: 100%; top: 0.88rem; left: 0; z-index: 3; background-color: #fff; border-bottom: 0.01rem solid #e4e4e5; display: none;}
-.m-select.s-show > .ct{display: block;}
+.m-select.s-show > .ct{display: block; max-height: 4rem; overflow-y: scroll;}
+.m-select.s-show > .ct .label{box-sizing: border-box; display: block; border-bottom: 0.01rem solid #dbdbdb;}
 .m-select.s-show > .title:after{transform: rotate(180deg);}
 
 
