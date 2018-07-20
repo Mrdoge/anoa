@@ -11,7 +11,7 @@
 				<div class="link">查看详情</div>
 			</router-link>
 		</div>
-		<loading :loadingShow="loadingData.loadingShow" :botLineShow="loadingData.botLineShow && list.length" :noDataShow="loadingData.noDataShow"></loading>
+		<loading :loadingShow="loadingData.loadingShow" :botLineShow="loadingData.botLineShow && list.length" :noDataShow="!list.length && !loadingData.loadingShow"></loading>
 	</div>
 </template>
 
