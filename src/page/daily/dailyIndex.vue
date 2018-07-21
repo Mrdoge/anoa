@@ -9,7 +9,7 @@
         <!--展开list-->
         <div class="m-dropdown" v-if="list.length" v-for="(items,index) in list" :key="items.s_id" :class="{'s-show':items.isShow}">
             <div class="title" @click="setIndex(index)">
-                <span class="txt">{{items.s_name}}</span>
+                <span class="txt">{{items.s_name}}（{{items.dailyList.length}}）</span>
                 <div class="arrow3"><i class="icon-zhankai icon"></i></div>
             </div>
             <transition class="animated" name="fadeInLeft" enter-active-class="animated fadeInLeft" leave-active-class="animated fadeOutLeft" v-for="items2 in items.dailyList" :key="items2.da_id">
