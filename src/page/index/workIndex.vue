@@ -94,10 +94,10 @@ export default {
   methods:{
     checkIsAdmin(){
       var vm = this;
-      if (localStorage.getItem('isAdmin')) {     //如果检测到缓存有值
-        vm.isAdmin = localStorage.getItem('isAdmin');
-        return false
-      }
+      // if (localStorage.getItem('isAdmin')) {     //如果检测到缓存有值
+      //   vm.isAdmin = localStorage.getItem('isAdmin');
+      //   return false
+      // }
       var url = vm.$store.state.httpUrl.login.checkIsLogin;
       vm.axios.post(url)
         .then((res) => {
