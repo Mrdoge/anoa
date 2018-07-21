@@ -111,7 +111,7 @@ export default {
                         type:1
                     })
 
-                    //vm.$router.push({path:'/info/infoIndex'});//跳转到该路由
+                    vm.$router.push({path:'/info/infoIndex'});//跳转到该路由
                     setTimeout(() => {
                         vm.$store.state.isLogin = true;
                         localStorage.setItem('userId',res.data.retval.userId)

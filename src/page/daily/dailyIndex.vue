@@ -2,7 +2,7 @@
     <div class="m-dailyWrap">
         <!-- 时间模块 -->
         <div class="m-time">
-            {{nowDate}}  &nbsp;总共{{dailyLength}}份
+            <span>{{nowDate}}  &nbsp;总共{{dailyLength}}份</span>
         </div>
         <!-- 时间模块 end -->
 
@@ -189,7 +189,9 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .m-dailyWrap{height: 100%;}
-.m-time{color: #ababab;height: 0.56rem;position: relative;padding-top: 0.18rem;padding-bottom: 0.12rem;padding-left: 0.32rem;box-sizing: border-box; background-color: #f0f4f7;}
+/* .m-time{color: #ababab;height: 0.56rem;position: relative;padding-top: 0.18rem;padding-bottom: 0.12rem;padding-left: 0.32rem;box-sizing: border-box; background-color: #f0f4f7;} */
+.m-time{color: #000; padding: 0.28rem 0.32rem; font-size: 0.28rem; padding-left: 0;}
+.m-time > span{border-left: 0.14rem solid #4f77aa; padding-left: 0.2rem;}
 .m-dropdown > .title{color: #ababab;font-size: 0.28rem;height: 0.7rem;cursor: pointer; line-height: 0.7rem;position: relative;width: 100%;border: 0.01rem solid #e4e4e5;border-left: none;border-right: none; background-color: #f0f4f7;}
 .m-dropdown > .title > .txt{position: absolute;left: 0.32rem;}
 .m-dropdown > .title > .arrow3 i{font-size: 0.32rem;}

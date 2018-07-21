@@ -146,10 +146,11 @@ export default {
                         type:1
                     })
                     setTimeout(() => {
-                        window.location.reload();
-                        vm.$router.push('/index/workIndex')
+                        //window.location.reload();
+                        //vm.$router.push('/info/infoIndex')
                         localStorage.setItem('userId','')   //清空userId
                         //localStorage.setItem('isAdmin','')   //清空isAdmin
+                        window.location.href = window.location.protocol + '//' + window.location.host
                     },1000);
                 }else{
                     vm.F['Hint'](vm,{

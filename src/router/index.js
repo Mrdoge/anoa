@@ -87,7 +87,7 @@ export default new Router({
     },
     {
       path: '/',
-      redirect: '/index/workIndex' //默认到消息页面
+      redirect: '/info/infoIndex' //默认到消息页面
     },
 
     //404页面

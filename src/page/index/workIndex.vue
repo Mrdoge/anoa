@@ -111,7 +111,19 @@ export default {
           }
         })
     }
-  }//methods
+  },//methods
+  computed:{
+    isLogin(){
+      var vm = this;
+      return vm.$store.state.isLogin;
+    }
+  },
+  watch:{
+    'isLogin'(){
+      var vm = this;
+      vm.checkIsAdmin();
+    }
+  }
 }
 </script>
 
