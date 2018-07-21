@@ -98,6 +98,12 @@ export default {
 
       //判断footer选中图片
       vm.checkCur()
+
+      //判断是否从工作详情去到工作日报去工作日报首页
+      if ((to.path.indexOf('daily/dailyIndex') > -1) && !(from.path.indexOf('daily/dailyDetalis') > -1) ) {
+        localStorage.setItem('calendarDate','')
+      }
+
     },
     isLogin(){  //判断是否登陆
       var vm = this;

@@ -84,7 +84,7 @@ export default {
             nowDate:this.getNowDate(),
             dailyLength:0,
             calendar:{
-                //value:[2017,7,20], //默认日期
+                value:[], //默认日期
                 // lunar:true, //显示农历
                 select(value){
                     console.log(value.toString().replace(/,/g,'-'));
@@ -111,6 +111,24 @@ export default {
     },
     created(){
         document.body.style.backgroundColor = "#fff";
+
+        var vm = this;
+
+        /*判断是否保留历史查询*/
+        var date = localStorage.getItem('calendarDate');
+        if (date) {
+            vm.nowDate = date;
+            var date_arr = date.split('-');
+            vm.calendar.value.splice(0,vm.calendar.value.length);
+            for (let i = 0; i < date_arr.length; i++) {
+                vm.calendar.value.push(date_arr[i]);
+            }
+        }else{
+            var nowTime = vm.F['dateFormat'](new Date().getTime()).split(' ')[0]
+            vm.nowDate = nowTime
+        }
+        /*判断是否保留历史查询 end*/
+        
         this.getData();
         //console.log(this.calendar)
     },
@@ -121,9 +139,11 @@ export default {
     methods:{
         getData(date){
             var vm = this;
-            this.axios.post(this.$store.state.httpUrl.daily.dailyList,qs.stringify({
+            var postData = {
                 eTime:vm.nowDate
-            }))
+            }
+
+            this.axios.post(this.$store.state.httpUrl.daily.dailyList,qs.stringify(postData))
             .then(function (res) {
                 if(res.data.code == 1){
                     //先清除
@@ -155,7 +175,17 @@ export default {
         },
         calendarSelect(date){
             var vm = this;
-            vm.nowDate = date.toString().replace(/,/g,'-')
+            vm.nowDate = date.toString().replace(/,/g,'-');
+
+            //写进缓存（从日报详情回来保持原来的历史时间）
+            localStorage.setItem('calendarDate',date.toString().replace(/,/g,'-'));
+
+            //设置日历默认时间
+            vm.calendar.value.splice(0,vm.calendar.value.length)
+            for (let i = 0; i < date.length; i++) {
+               vm.calendar.value.push(date[i])
+            }
+
             vm.getData();
             vm.$store.state.isTopCalendarShow = false
         },
@@ -181,7 +211,7 @@ export default {
                     vm.dailyLength ++
                 }
             }
-        },
+        }
     }
 }
 </script>
