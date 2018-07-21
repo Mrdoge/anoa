@@ -693,13 +693,15 @@ F['betweenDay'] = function(start,end){
     var allDay = 1.0;
 
     var n = (new Date(end).getTime() - new Date(start).getTime()) / (hour * 24);
+
+    console.log(n)
     if (n < 0) {   //结束时间大于开始时间
         return false
     }
     //console.log(n)
     //如果是同一天
     if(n < 1){
-        if(n <= 0.125){    //半天
+        if(n <= 0.25){    //半天
             days += half
         }else{          //一天
             days += allDay

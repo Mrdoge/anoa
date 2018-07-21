@@ -27,7 +27,12 @@
             <div class="list f-clear">
                 <div class="left">请假时长</div>
                 <div class="right">
-                    <input type="number" step="0.5" v-model="form.duration" style="width:90%;">天
+                    <template v-if="form.duration">
+                        <input type="number" step="0.5" v-model="form.duration" style="width:90%;">天
+                    </template>
+                    <template v-if="!form.duration">
+                        <input type="number" step="0.5" v-model="form.duration" style="width:90%;" placeholder="请输入请假时长"><i class="icon-xiangyou icon"></i>
+                    </template>
                 </div>
             </div>
             <div class="list f-clear" @click="getLeaverType">
@@ -359,5 +364,5 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
+.m-applyList > .list > .right input::-webkit-input-placeholder {color: #a1a1a1;}
 </style>
