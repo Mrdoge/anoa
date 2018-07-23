@@ -41,6 +41,10 @@
             <i class="icon-hetongguanli icon s-purpose"></i><br/>
 						合同管理
           </router-link>
+          <router-link to="/task/taskIndex">
+            <i class="icon-renwuguanli icon s-blue"></i><br/>
+						任务管理
+          </router-link>
         </div>
         <!--频道 end-->
     </div>

@@ -1,9 +1,9 @@
-let localhostDev = true;
+let localhostDev = false;
 //如果是本地开发，就把localhostDev 设置成true，连接就是拼成‘http://localhost:8080/api/test’
 //生产环境，就把localhostDev 设置成false，连接就是拼成‘http://xxx.com/api/test’
 let _host= localhostDev ? 'http://192.168.1.230/BusinessProject/www.anoa.de' : 'http://anoa.xilide.vip';
 //let _host= localhostDev ? 'http://anoa.xilide.vip' : 'http://anoa.xilide.vip';  //本地打包测试用
-//let _host= localhostDev ? '' : 'http://anoa.xilide.vip';  //本地打包测试用
+//let _host= localhostDev ? 'http://192.168.1.222' : 'http://anoa.xilide.vip';  //本地打包测试用
 
 //问题中心接口
 const qst = {
@@ -98,6 +98,7 @@ const task = {
     myTaskList:_host + '/wap/MemberList/MyTaskList',    //待办任务
     mytaskDetail:_host + '/wap/MemberList/MytaskDetail',    //任务详情
     endTask:_host + '/wap/MemberList/endTask',    //结束任务
+    addTask:_host + '/wap/MemberList/addTask',    //结束任务
 }
 
 //设置

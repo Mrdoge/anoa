@@ -1,68 +1,68 @@
 <template>
     <div>
-		<div class="m-normalTitleBar">合同编号</div>
+		<div class="m-borderTitle"><span>合同编号</span></div>
 		<div class="m-normalList">{{data.contract_number?data.contract_number:'-'}}</div>
 
-		<div class="m-normalTitleBar">合同名称</div>
+		<div class="m-borderTitle"><span>合同名称</span></div>
 		<div class="m-normalList">{{data.contract_name?data.contract_name:'-'}}</div>
 
-		<div class="m-normalTitleBar">项目</div>
+		<div class="m-borderTitle"><span>项目</span></div>
 		<div class="m-normalList">{{data.title?data.title:'-'}}</div>
 
-		<div class="m-normalTitleBar">签订时间</div>
+		<div class="m-borderTitle"><span>签订时间</span></div>
 		<div class="m-normalList">{{data.sign_time?unixFormat(data.sign_time):'-'}}</div>
 
-		<div class="m-normalTitleBar">甲方单位</div>
+		<div class="m-borderTitle"><span>甲方单位</span></div>
 		<div class="m-normalList">{{data.owner?data.owner:'-'}}</div>
-		<div class="m-normalTitleBar">甲方合同负责人</div>
+		<div class="m-borderTitle"><span>甲方合同负责人</span></div>
 		<div class="m-normalList">{{data.owner_man?data.owner_man:'-'}}</div>
-		<div class="m-normalTitleBar">甲方合同负责人联系方式</div>
+		<div class="m-borderTitle"><span>甲方合同负责人联系方式</span></div>
 		<div class="m-normalList">{{data.owner_man_tel?data.owner_man_tel:'-'}}</div>
 
-		<div class="m-normalTitleBar">乙方单位</div>
+		<div class="m-borderTitle"><span>乙方单位</span></div>
 		<div class="m-normalList">{{data.second?data.second:'-'}}</div>
-		<div class="m-normalTitleBar">乙方合同负责人</div>
+		<div class="m-borderTitle"><span>乙方合同负责人</span></div>
 		<div class="m-normalList">{{data.second_man?data.second_man:'-'}}</div>
-		<div class="m-normalTitleBar">乙方合同负责人联系方式</div>
+		<div class="m-borderTitle"><span>乙方合同负责人联系方式</span></div>
 		<div class="m-normalList">{{data.second_man_tel?data.second_man_tel:'-'}}</div>
 
-		<div class="m-normalTitleBar">开始日期</div>
+		<div class="m-borderTitle"><span>开始日期</span></div>
 		<div class="m-normalList">{{data.s_time?unixFormat(data.s_time):'-'}}</div>
-		<div class="m-normalTitleBar">结束日期</div>
+		<div class="m-borderTitle"><span>结束日期</span></div>
 		<div class="m-normalList">{{data.e_time?unixFormat(data.e_time):'-'}}</div>
 
-		<div class="m-normalTitleBar">总工期天数</div>
+		<div class="m-borderTitle"><span>总工期天数</span></div>
 		<div class="m-normalList">{{data.total_periods?data.total_periods:'-'}}</div>
-		<div class="m-normalTitleBar">合同总金额</div>
+		<div class="m-borderTitle"><span>合同总金额</span></div>
 		<div class="m-normalList">{{data.total_price?data.total_price:'-'}}</div>
-		<div class="m-normalTitleBar">合同预付款</div>
+		<div class="m-borderTitle"><span>合同预付款</span></div>
 		<div class="m-normalList">{{data.prepay?data.prepay:'-'}}</div>
-		<div class="m-normalTitleBar">合同尾款</div>
+		<div class="m-borderTitle"><span>合同尾款</span></div>
 		<div class="m-normalList">{{data.final?data.final:'-'}}</div>
 		
 		
-		<div class="m-normalTitleBar">发票类型</div>
+		<div class="m-borderTitle"><span>发票类型</span></div>
 		<div class="m-normalList">{{data.invoice_type?invoice_type[+data.invoice_type].name:'-'}}</div>
-		<div class="m-normalTitleBar">发票税率</div>
+		<div class="m-borderTitle"><span>发票税率</span></div>
 		<div class="m-normalList">{{data.invoice_per?data.invoice_per:'-'}}</div>
 
 	
-		<div class="m-normalTitleBar">法人代表</div>
+		<div class="m-borderTitle"><span>法人代表</span></div>
 		<div class="m-normalList">{{data.representative?data.representative:'-'}}</div>
 
-		<div class="m-normalTitleBar">联系电话</div>
+		<div class="m-borderTitle"><span>联系电话</span></div>
 		<div class="m-normalList">{{data.phone_mob?data.phone_mob:'-'}}</div>
-		<div class="m-normalTitleBar">邮箱</div>
+		<div class="m-borderTitle"><span>邮箱</span></div>
 		<div class="m-normalList">{{data.email?data.email:'-'}}</div>
 
-		<div class="m-normalTitleBar">对方开户银行</div>
+		<div class="m-borderTitle"><span>对方开户银行</span></div>
 		<div class="m-normalList">{{data.deposit_bank?data.deposit_bank:'-'}}</div>
-		<div class="m-normalTitleBar">对方账户名称</div>
+		<div class="m-borderTitle"><span>对方账户名称</span></div>
 		<div class="m-normalList">{{data.corporate_name?data.corporate_name:'-'}}</div>
-		<div class="m-normalTitleBar">对方银行账号</div>
+		<div class="m-borderTitle"><span>对方银行账号</span></div>
 		<div class="m-normalList">{{data.corporate?data.corporate:'-'}}</div>
 
-		<div class="m-normalTitleBar">合同照片</div>
+		<div class="m-borderTitle"><span>合同照片</span></div>
 		<div class="m-listRow g-mt0">
 			<div class="ct">
 				<div class="imgList">

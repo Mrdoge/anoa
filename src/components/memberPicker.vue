@@ -7,7 +7,7 @@
                     <a href="javascript:;" class="back" @click="close">
                         <i class="icon-flow icon"></i>
                     </a>
-                    <span class="txt">选择审批人</span>
+                    <span class="txt">{{title?title:"选择审批人"}}</span>
                 </div>
                 <!--头部 end-->
                 <div class="m-forNav"></div>
@@ -60,6 +60,9 @@ export default {
     props:{
         value:{
             type: Boolean
+        },
+        title:{
+            type: String
         }
     },
     created(){

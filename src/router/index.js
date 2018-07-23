@@ -55,7 +55,7 @@ import myDailyList from '@/page/myIndex/myDailyList'          //我的日报记�
 import mySignList from '@/page/myIndex/mySignList'          //我的打卡记录页
 import mySchedule from '@/page/myIndex/mySchedule'          //我的行程
 import myTaskList from '@/page/myIndex/myTaskList'          //代办事务
-import myTaskDetail from '@/page/myIndex/myTaskDetail'          //代办事务
+//import myTaskDetail from '@/page/myIndex/myTaskDetail'          //代办事务
 
 
 //项目管理
@@ -68,6 +68,11 @@ import projectDetail from '@/page/project/projectDetail'      //项目详情页
 import questionList from '@/page/question/questionList'      //问题中心首页
 import questionAdd from '@/page/question/questionAdd'      //新增项目管理页
 import questionDetail from '@/page/question/questionDetail'      //问题详情页
+
+//任务管理
+import taskIndex from '@/page/task/taskIndex'      //任务管理首页
+import taskDetail from '@/page/task/taskDetail'    //任务详情
+import taskAdd from '@/page/task/taskAdd'          //发布任务
 
 //员工档案
 import memberDetail from '@/page/member/memberDetail'      //员工详情
@@ -465,15 +470,6 @@ export default new Router({
       },
       component: myTaskList
     },
-    {
-      path: '/myIndex/myTaskDetail/:tId',
-      name: 'myTaskDetail',
-      meta:{
-        index:1.3,
-        title:"任务详情"
-      },
-      component: myTaskDetail
-    },
 
     //合同管理
     {
@@ -551,6 +547,35 @@ export default new Router({
         title:"修改密码"
       },
       component: editPassword
+    },
+
+    /**任务管理**/
+    {
+      path: '/task/taskIndex',
+      name: 'taskIndex',
+      meta:{
+        index:1.1,
+        title:"任务管理"
+      },
+      component: taskIndex
+    },
+    {
+      path: '/task/taskDetail/:tId',
+      name: 'taskDetail',
+      meta:{
+        index:1.3,
+        title:"任务详情"
+      },
+      component: taskDetail
+    },
+    {
+      path: '/task/taskAdd',
+      name: 'taskAdd',
+      meta:{
+        index:1.3,
+        title:"发布任务"
+      },
+      component: taskAdd
     },
   ]
 })
