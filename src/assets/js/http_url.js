@@ -1,4 +1,4 @@
-let localhostDev = false;
+let localhostDev = true;
 //如果是本地开发，就把localhostDev 设置成true，连接就是拼成‘http://localhost:8080/api/test’
 //生产环境，就把localhostDev 设置成false，连接就是拼成‘http://xxx.com/api/test’
 let _host= localhostDev ? 'http://192.168.1.230/BusinessProject/www.anoa.de' : 'http://anoa.xilide.vip';
@@ -100,6 +100,11 @@ const task = {
     endTask:_host + '/wap/MemberList/endTask',    //结束任务
 }
 
+//设置
+const seting = {
+    editPassword:_host + '/wap/system/editPassword',    //修改密码
+}
+
 export default{
     HOST:_host,
     temp: _host + '/template',
@@ -122,5 +127,6 @@ export default{
     section,
     my,
     info,
-    task
+    task,
+    seting
 }

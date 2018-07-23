@@ -12,7 +12,7 @@
         </router-link>
         <router-link :to="'/info/infoList/' + typeList[1].cate_id" class="list s-purple f-clear">
             <div class="left" :class="{'s-red':+typeList[1].count}">
-                <i class="iconfont icon-renwuguanli-"></i>
+                <i class="iconfont icon-renwuguanli"></i>
             </div>
             <div class="right">
                 <h2 class="title">申请通知</h2>

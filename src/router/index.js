@@ -75,6 +75,10 @@ import memberDetail from '@/page/member/memberDetail'      //员工详情
 //404页面
 import page404 from '@/page/index/page404'      //404页面
 
+//设置页面
+import settingIndex from '@/page/setting/settingIndex'      //设置首页
+import editPassword from '@/page/setting/editPassword'      //设置密码
+
 export default new Router({
   mode: 'hash',
   scrollBehavior (to, from, savedPosition) {  //每次滚动到会顶部
@@ -527,6 +531,26 @@ export default new Router({
         title:"问题详情"
       },
       component: questionDetail
+    },
+
+    /**设置**/
+    {
+      path: '/setting/settingIndex',
+      name: 'settingIndex',
+      meta:{
+        index:1.1,
+        title:"设置"
+      },
+      component: settingIndex
+    },
+    {
+      path: '/setting/editPassword',
+      name: 'editPassword',
+      meta:{
+        index:1.2,
+        title:"修改密码"
+      },
+      component: editPassword
     },
   ]
 })

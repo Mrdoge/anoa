@@ -22,40 +22,47 @@
         <div class="ct">
             <router-link to="/myIndex/myApplyIndex"  class="list">
                 <div class="wrap">
-                    <i class="icon-wodeshenqing icon"></i>
+                    <i class="icon-shenqing icon"></i>
                 </div>
-                我的申请
+                申请管理
             </router-link>
-            <router-link to="/myIndex/myTaskList" class="list">
+            <router-link to="/myIndex/mySignList" class="list">
+                <div class="wrap s-red">
+                    <i class="icon-dingwei1 icon"></i>
+                </div>
+                我的打卡
+            </router-link>
+            <router-link to="/myIndex/myDailyList" class="list">
+                <div class="wrap">
+                    <i class="icon-ai-edit icon"></i>
+                </div>
+                我的日报
+            </router-link>
+            <!-- <router-link to="/myIndex/myTaskList" class="list">
                 <div class="wrap s-red">
                     <i class="icon-daibanshiwu icon"></i>
                 </div>
                 待办任务
-            </router-link>
-            <router-link to="/myIndex/mySchedule" class="list">
-                <div class="wrap">
+            </router-link> -->
+            <router-link to="/myIndex/mySchedule" class="list g-mt30">
+                <div class="wrap s-red">
                     <i class="icon-wodehangcheng icon"></i>
                 </div>
                 我的行程
             </router-link>
-            <router-link to="/myIndex/mySignList" class="list g-mt30">
-                <div class="wrap s-red">
-                    <i class="icon-daqiaqiandao icon"></i>
+
+            <router-link to="/setting/settingIndex" class="list g-mt30">
+                <div class="wrap s-gray">
+                    <i class="icon-shezhi1 icon"></i>
                 </div>
-                打卡记录
-            </router-link>
-            <router-link to="/myIndex/myDailyList" class="list g-mt30">
-                <div class="wrap">
-                    <i class="icon-woderibao icon"></i>
-                </div>
-                我的日报
+                设置
             </router-link>
         </div>
         <!--列表 end-->
 
-        <a href="javascript:;" class="m-loginOutBtn u-FU_btn" :class="{'z-loading':loading}" @click="loginOut">
+        <!-- <a href="javascript:;" class="m-loginOutBtn u-FU_btn" :class="{'z-loading':loading}" @click="loginOut">
             退出登陆<span class="p-loading"></span>
-        </a>
+        </a> -->
 
     </div>
 </template>
@@ -129,38 +136,6 @@ export default {
 			}
 			return vm.F['unixFormat'](timestamp)
         },
-        loginOut(){
-            var vm = this;
-            if (vm.loading) {
-                return false
-            }
-            var url = vm.$store.state.httpUrl.loginOut;
-
-            vm.loading = true
-            vm.axios.post(url)
-            .then((res) => {
-                var data = res.data;
-                if (data.code >= 1) {
-                    vm.F['Hint'](vm,{
-                        ct:data.retval.okTip,
-                        type:1
-                    })
-                    setTimeout(() => {
-                        //window.location.reload();
-                        //vm.$router.push('/info/infoIndex')
-                        localStorage.setItem('userId','')   //清空userId
-                        //localStorage.setItem('isAdmin','')   //清空isAdmin
-                        window.location.href = window.location.protocol + '//' + window.location.host
-                    },1000);
-                }else{
-                    vm.F['Hint'](vm,{
-                        ct:data.msg
-                    })
-                }
-
-                vm.loading = false
-            })
-        }
 	}
 }
 </script>
@@ -180,6 +155,7 @@ export default {
 .m-myIndex > .ct > .list > .wrap{width: 0.52rem;height: 0.52rem; background-color: #f2b521; text-align: center;line-height: 0.52rem;display: inline-block;margin-right: 0.36rem;}
 .m-myIndex > .ct > .list > .wrap i{color: #fff;font-size:0.35rem; }
 .m-myIndex > .ct > .list > .wrap.s-red{background-color: #fd7558;}
+.m-myIndex > .ct > .list > .wrap.s-gray{background-color: #c1c1c1;}
 .m-myIndex > .ct > .list.g-mt30{margin-top: 0.3rem;border-top: 0.01rem solid #e9e9e9;}
 
 .m-loginOutBtn{position: relative; display: block; width: 5rem; height: 0.8rem; line-height: 0.8rem; font-size: 0.3rem; border-radius: 0.1rem; color: #fff; background-color: #d62020; text-align: center; margin: 0 auto; margin-top: 0.4rem; border: none;}
