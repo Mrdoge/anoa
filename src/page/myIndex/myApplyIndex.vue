@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<div class="m-myApply">
-			<router-link :to="items.link + '/' + index" class="wrap" v-for="(items,index) in list" :key="items.txt">
+			<router-link :to="items.link + '/' + index + '/2'" class="wrap" v-for="(items,index) in list" :key="items.txt"><!--链接参数index和type-->
 				<div class="ct">
 					<i :class="items.class"></i>
 					<div class="txt">{{items.txt}}</div>

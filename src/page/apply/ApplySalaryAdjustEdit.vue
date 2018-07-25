@@ -127,7 +127,7 @@ export default {
                         type:1
                     })
                     setTimeout(() => {
-                        vm.$router.push('/myIndex/myApplyList/5');   //我的调薪申请
+                        vm.$router.push('/myIndex/myApplyList/5/2');   //我的调薪申请
                     },1500)
 
                     vm.loading = false

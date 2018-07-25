@@ -226,9 +226,9 @@ export default {
                         type:1
                     })
                     // setTimeout(() => {
-                    //     vm.$router.push('/myIndex/myApplyList/4');   //我的调动申请
+                    //     vm.$router.push('/myIndex/myApplyList/4/2');   //我的调动申请
 					// },1500)
-					vm.$router.push('/myIndex/myApplyList/4');   //我的调动申请
+					vm.$router.push('/myIndex/myApplyList/4/2');   //我的调动申请
 
                     vm.loading = false
                 }else{

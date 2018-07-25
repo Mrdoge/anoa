@@ -112,7 +112,7 @@ export default {
                         type:1
                     })
                     setTimeout(() => {
-                        vm.$router.push('/myIndex/myApplyList/1');   //我的转正申请
+                        vm.$router.push('/myIndex/myApplyList/1/2');   //我的转正申请
                     },1500)
 
                     vm.loading = false

@@ -300,9 +300,9 @@ export default {
                         type:1
                     })
                     // setTimeout(() => {
-                    //     vm.$router.push('/myIndex/myApplyList/2');   //我的请假申请
+                    //     vm.$router.push('/myIndex/myApplyList/2/2');   //我的请假申请
                     // },1500)
-                    vm.$router.push('/myIndex/myApplyList/2');   //我的请假申请
+                    vm.$router.push('/myIndex/myApplyList/2/2');   //我的请假申请
 
                     vm.loading = false
                 }else{

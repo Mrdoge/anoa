@@ -1,4 +1,4 @@
-let localhostDev = false;
+let localhostDev = true;
 //如果是本地开发，就把localhostDev 设置成true，连接就是拼成‘http://localhost:8080/api/test’
 //生产环境，就把localhostDev 设置成false，连接就是拼成‘http://xxx.com/api/test’
 let _host= localhostDev ? 'http://192.168.1.230/BusinessProject/www.anoa.de' : 'http://anoa.xilide.vip';
@@ -47,6 +47,7 @@ const apply = {
     applyTurnOfficial:_host + '/wap/Apply/applyTurnOfficial',   //添加转正申请
     applyTransfer:_host + '/wap/Apply/applyTransfer',   //添加调任申请
     applySalaryAdjust:_host + '/wap/Apply/applySalaryAdjust',   //添加调薪申请
+    applyStatusEdit:_host + '/wap/Apply/applyStatusEdit',   //审批申请通不通过接口
 
     getUserHistorySelect:_host + '/wap/apply/getUserHistorySelect',   //获取历史审批人
     getLeaverType:_host + '/wap/apply/getLeaverType',   //获取请假类型
@@ -79,7 +80,8 @@ const section = {
 
 //个人中心各种接口（申请）
 const my = {
-    applyList:_host + '/wap/myIndex/applyList',
+    applyList:_host + '/wap/myIndex/applyList',         //我的申请列表
+    applyListWait:_host + '/wap/myIndex/applyListWait', //待批申请列表
     mySignList:_host + '/wap/MyIndex/mySignList', //我的打卡
     myDaily:_host + '/wap/MyIndex/myDaily', //我的日报
 }

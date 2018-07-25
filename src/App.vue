@@ -104,6 +104,11 @@ export default {
         localStorage.setItem('calendarDate','')
       }
 
+      //判断是否从审批页面去到审批列表
+      if ((to.path.indexOf('myIndex/myApplyList') > -1) && !(from.path.indexOf('myIndex/MyApplyCheck') > -1) ) {
+        localStorage.setItem('ifFromCheck','');
+      }
+
     },
     isLogin(){  //判断是否登陆
       var vm = this;

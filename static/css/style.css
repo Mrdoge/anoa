@@ -230,7 +230,7 @@ i,.iconfont{font-family: iconfont; font-style: normal;}
 .m-listImg > .list > .right > .address{font-size: 0.24rem; color: #b3b3b3; margin-top: 0.24rem;}
 
 /*通用列表2上下形*/
-.m-listRow{display: block; background-color: #fff; padding: 0.3rem; margin-top: 0.3rem; border-top: 0.01rem solid #e4e4e5; border-bottom: 0.01rem solid #e4e4e5;}
+.m-listRow{display: block; background-color: #fff; padding: 0.3rem 0.38rem; margin-top: 0.3rem; border-top: 0.01rem solid #e4e4e5; border-bottom: 0.01rem solid #e4e4e5;}
 .m-listRow > .title{position: relative; font-size: 0.32rem; color: #000;}
 .m-listRow > .ct{margin-top: 0.2rem; font-size: 0.26rem; line-height: 1.4; white-space: pre-line;}
 

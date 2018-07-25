@@ -45,6 +45,10 @@
             <i class="icon-renwuguanli icon s-blue"></i><br/>
 						任务管理
           </router-link>
+          <router-link to="/myIndex/myApplyIndex">
+            <i class="icon-shenqing icon s-yellow"></i><br/>
+						申请管理
+          </router-link>
         </div>
         <!--频道 end-->
     </div>

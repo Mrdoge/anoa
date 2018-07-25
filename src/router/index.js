@@ -50,6 +50,7 @@ import myIndex from '@/page/myIndex/myIndex'          //个人中心首页
 import myApplyIndex from '@/page/myIndex/myApplyIndex'          //我的申请
 import myApplyList from '@/page/myIndex/myApplyList'          //我的申请
 import myApplyDetails from '@/page/myIndex/myApplyDetails'          //我的申请详情页
+import myApplyCheck from '@/page/myIndex/myApplyCheck'          //我的申请审批
 import myInfo from '@/page/myIndex/myInfo'          //个人资料页
 import myDailyList from '@/page/myIndex/myDailyList'          //我的日报记录页
 import mySignList from '@/page/myIndex/mySignList'          //我的打卡记录页
@@ -403,12 +404,12 @@ export default new Router({
       name: 'myApplyIndex',
       meta:{
         index:1.1,
-        title:"我的申请"
+        title:"申请管理"
       },
       component: myApplyIndex
     },
     {
-      path: '/myIndex/myApplyList/:index',
+      path: '/myIndex/myApplyList/:index/:type',    //type=1待批申请，type=2我的申请
       name: 'myApplyList',
       meta:{
         index:1.2,
@@ -424,6 +425,15 @@ export default new Router({
         title:"申请详情"
       },
       component: myApplyDetails
+    },
+    {
+      path: '/myIndex/myApplyCheck/:index/:id',
+      name: 'myApplyCheck',
+      meta:{
+        index:1.3,
+        title:"申请详情"
+      },
+      component: myApplyCheck
     },
     {
       path: '/myIndex/myInfo',
