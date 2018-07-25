@@ -39,13 +39,19 @@ export default {
     methods:{
         goback(){
             var vm = this
-            //console.log(vm.$route.path)
-            if(vm.$store.state.isSign){
-                if(vm.$route.path.indexOf('addsignRule') > -1){
-                    window.history.go(-1)
-                }else{
-                    vm.$router.push('/index/workIndex');
-                }
+
+            // if(vm.$store.state.isSign){
+            //     if(vm.$route.path.indexOf('addsignRule') > -1){
+            //         window.history.go(-1)
+            //     }else{
+            //         vm.$router.push('/index/workIndex');
+            //     }
+            // }else{
+            //     window.history.go(-1)
+            // }
+
+            if (vm.$route.meta.lastUrl) {
+                vm.$router.push(vm.$route.meta.lastUrl);
             }else{
                 window.history.go(-1)
             }

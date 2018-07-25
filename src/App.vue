@@ -128,6 +128,9 @@ export default {
               localStorage.setItem('userId',userId)
               //localStorage.setItem('isAdmin',isAdmin)
               //vm.$store.state.isLogin = false
+              //console.log(vm.$root._router.options.routes)
+              //vm.$root._router.options.routes.splice(0,vm.$root._router.options.route.length)
+
           }else{
               F['Hint'](vm,{
                 ct:res.data.msg

@@ -176,7 +176,8 @@ export default new Router({
       meta:{
         index:1,
         title:"工作日报",
-        isTopCalendarIconShow:true  //顶部日历图标是否显示
+        isTopCalendarIconShow:true,  //顶部日历图标是否显示
+        lastUrl:"/index/workIndex"
       },
       component: dailyIndex
     },
@@ -214,7 +215,8 @@ export default new Router({
       name: 'signIndex',
       meta:{
         index:1.1,
-        title:"打卡签到"
+        title:"打卡签到",
+        lastUrl:"/index/workIndex"
       },
       component: signIndex
     },
@@ -224,7 +226,8 @@ export default new Router({
       meta:{
         index:1.2,
         title:"打卡统计",
-        isTopCalendarIconShow:true  //顶部日历图标是否显示
+        isTopCalendarIconShow:true,  //顶部日历图标是否显示
+        lastUrl:"/index/workIndex"
       },
       component: signCount
     },
@@ -233,7 +236,8 @@ export default new Router({
       name: 'signRuleList',
       meta:{
         index:1.3,
-        title:"打卡规则"
+        title:"打卡规则",
+        lastUrl:"/index/workIndex"
       },
       component: signRuleList
     },
@@ -404,7 +408,8 @@ export default new Router({
       name: 'myApplyIndex',
       meta:{
         index:1.1,
-        title:"申请管理"
+        title:"申请管理",
+        lastUrl:"/myIndex/myIndex"
       },
       component: myApplyIndex
     },
@@ -413,7 +418,8 @@ export default new Router({
       name: 'myApplyList',
       meta:{
         index:1.2,
-        title:"申请记录"
+        title:"申请列表",
+        lastUrl:"/myIndex/myApplyIndex"
       },
       component: myApplyList
     },
@@ -449,7 +455,8 @@ export default new Router({
       name: 'myDailyList',
       meta:{
         index:1.1,
-        title:"我的日报"
+        title:"我的日报",
+        lastUrl:"/myIndex/myIndex"
       },
       component: myDailyList
     },
@@ -487,7 +494,8 @@ export default new Router({
       name: 'projectList',
       meta:{
         index:1.1,
-        title:"项目管理"
+        title:"项目管理",
+        lastUrl:"/index/workIndex"
       },
       component: projectList
     },
@@ -505,7 +513,8 @@ export default new Router({
       name: 'projectDetail',
       meta:{
         index:1.2,
-        title:"项目详情"
+        title:"项目详情",
+        lastUrl:"/project/projectList"
       },
       component: projectDetail
     },
@@ -516,7 +525,8 @@ export default new Router({
       name: 'questionList',
       meta:{
         index:1.1,
-        title:"问题中心"
+        title:"问题中心",
+        lastUrl:"/index/workIndex"
       },
       component: questionList
     },
@@ -565,7 +575,8 @@ export default new Router({
       name: 'taskIndex',
       meta:{
         index:1.1,
-        title:"任务管理"
+        title:"任务管理",
+        lastUrl:"/index/workIndex"
       },
       component: taskIndex
     },
@@ -583,7 +594,7 @@ export default new Router({
       name: 'taskAdd',
       meta:{
         index:1.3,
-        title:"发布任务"
+        title:"发布任务",
       },
       component: taskAdd
     },

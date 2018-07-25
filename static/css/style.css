@@ -235,7 +235,7 @@ i,.iconfont{font-family: iconfont; font-style: normal;}
 .m-listRow > .ct{margin-top: 0.2rem; font-size: 0.26rem; line-height: 1.4; white-space: pre-line;}
 
 .m-listRow > .ct .imgList{position: relative; display: block; font-size: 0; margin-top: -0.06rem; margin-left: -0.16rem;}
-.m-listRow > .ct .imgList .wrap{cursor: pointer; position: relative; display: inline-block; width: 2.16rem; height: 1.76rem; margin-top: 0.06rem; margin-left: 0.16rem; vertical-align: middle;}
+.m-listRow > .ct .imgList .wrap{cursor: pointer; position: relative; display: inline-block; width: 2rem; height: 1.76rem; margin-top: 0.06rem; margin-left: 0.16rem; vertical-align: middle;}
 .m-listRow > .ct .imgList .wrap img{width: 100%; height: 100%;}
 .m-listRow > .ct .imgList .wrap.s-add{width: 2.16rem; height: 1.76rem; display: inline-block; text-align: center; line-height: 1.7rem; font-size: 0.8rem; color: #fff; background-color: #e9e9e9;}
 .m-listRow > .ct .imgList .wrap.s-add input[type="file"]{position: absolute; width: 100%; height: 100%; z-index: 3; left: 0; top: 0; box-sizing: border-box; cursor: pointer; opacity: 0;}
