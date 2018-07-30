@@ -22,8 +22,9 @@
             <div class="m-forbotNav" style="height: 2rem;"></div>
             <div class="m-bottom">
                 <div class="block f-clear">
-                <div class="btn" fu-modalin=".j-example" @click="toggleShow">查看范文</div>
-                <div class="btn j-submit u-FU_btn" @click="submit" :class="{'z-loading':loading}">提交<span class="p-loading"></span></div>
+                    <div class="btn" @click="toggleShow">查看范文</div>
+                    <div class="btn j-submit u-FU_btn" @click="submit(0)" :class="{'z-loading':loading[0]}">保存草稿<span class="p-loading"></span></div>
+                    <div class="btn j-submit u-FU_btn" @click="submit(1)" :class="{'z-loading':loading[1]}">提交<span class="p-loading"></span></div>
                 </div>
             </div>
             <!-- 底边 end-->
@@ -58,7 +59,7 @@ export default {
                 tomorrowDesc:"",
                 commentDesc:""
             },
-            loading:false
+            loading:[false,false]
         }
     },
     created(){
@@ -71,9 +72,10 @@ export default {
         toggleShow(){
             this.$store.state.isShadeShow = !this.$store.state.isShadeShow
         },
-        submit(){
+        submit(index){
             var vm = this;
-            if (vm.loading) {
+            index = +index
+            if (vm.loading[index]) {
                 return false
             }
             var postData = vm.form;
@@ -84,11 +86,11 @@ export default {
                     type:"noNull",
                     tips:"请输入今日工作内容"
                 },
-                {
-                    val:postData.tomorrowDesc,
-                    type:"noNull",
-                    tips:"请输入明日工作内容"
-                },
+                // {
+                //     val:postData.tomorrowDesc,
+                //     type:"noNull",
+                //     tips:"请输入明日工作内容"
+                // },
                 // {
                 //     val:postData.commentDesc,
                 //     type:"noNull",
@@ -106,7 +108,7 @@ export default {
                 return false
             }
 
-            vm.loading = true
+            vm.$set(vm.loading,index,true)
             vm.axios.post(vm.$store.state.httpUrl.daily.dailyAdd,qs.stringify(postData))
             .then(function (res) {
                 if (res.data.code == 1) {
@@ -126,7 +128,7 @@ export default {
                     })
                 }
 
-                vm.loading = false
+                vm.$set(vm.loading,index,false)
             })
             .catch(function (err) {
                 console.log(err);
@@ -145,6 +147,8 @@ export default {
 .m-write > .part{background-color: #fff;font-size: 0.26rem;padding-top: 0.28rem;padding-left: 0.32rem;color: #000;}
 .m-write > .part > .today{box-shadow: none; border:none;outline:none;width:7rem;height: 2.88rem;font-size: 0.26rem;}
 .m-write > .part > .line{height: 0.03rem;padding-left: 0.26rem;background-color: #e9e9e9;}
+
+.m-bottom > .block > .btn{width: 2.2rem; font-size: 0.28rem; margin-left: 0.1rem;}
 
 /*查看范文弹窗*/
 .m-FU_modal.s-example{width: 5.6rem; margin-left: -2.8rem; border-radius: 0;text-align: center;}

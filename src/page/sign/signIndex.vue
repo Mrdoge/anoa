@@ -3,7 +3,7 @@
         <!-- 签到模块 -->
         <div class="m-sign">
             <div class="position">
-                <i class="icon-dingwei icon"></i><br /><br />
+                <i class="icon-dingwei icon" @click="showPicker = true"></i><br /><br />
                 <!-- <span class="big j-addressDetails">双湖楼</span><br/></br> -->
                 <span class="j-address address">{{addressText()}}</span>
             </div>
@@ -19,7 +19,7 @@
         <div id="tip" style="margin-top: 1rem; margin-bottom: 0.2rem; font-size: 0.26rem; display: none;"></div>
 
         <div id="allmap"></div>
-        <!-- <mapPicker v-show="false"></mapPicker> -->
+        <mapPicker v-show="showPicker"></mapPicker>
     </div>
 </template>
 
@@ -38,7 +38,8 @@ export default {
             city:"",
             district:"",
             serverTime:"",    //服务器时间
-            loading:true      //获取地址中
+            loading:true,      //获取地址中
+            showPicker:false
         }
     },
     created(){
