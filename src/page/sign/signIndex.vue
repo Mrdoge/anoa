@@ -5,7 +5,9 @@
             <div class="position">
                 <i class="icon-dingwei icon" @click="showPicker = true"></i><br /><br />
                 <!-- <span class="big j-addressDetails">双湖楼</span><br/></br> -->
-                <span class="j-address address">{{addressText()}}</span>
+                <span class="j-address address" @click="showPicker = true">
+                    {{addressText()}}<i class="icon icon-xiangyou" v-show="!loading"></i>
+                </span>
             </div>
             <div class="sign" @click="sign">
                 <div class="txt"><span class="big j-timeCount">{{serverTime}}</span><br/>
@@ -19,7 +21,7 @@
         <div id="tip" style="margin-top: 1rem; margin-bottom: 0.2rem; font-size: 0.26rem; display: none;"></div>
 
         <div id="allmap"></div>
-        <mapPicker v-show="showPicker"></mapPicker>
+        <mapPicker :isShow="showPicker" :callback="setAddress"></mapPicker>
     </div>
 </template>
 
@@ -60,9 +62,9 @@ export default {
     mounted(){
         var vm = this;
         setTimeout(() => {
-            vm.getLocationByGaoDe()            //高德地图
+            //vm.getLocationByGaoDe()            //高德地图
             //vm.getLocationByBaiDu()            //百度地图
-            //vm.getLocationByTencent()           //腾讯地图
+            vm.getLocationByTencent()           //腾讯地图
         },500);
     },
     destroyed(){
@@ -253,7 +255,6 @@ export default {
             }
         },
         getLocationByTencent(){
-            /*在家测试能不能提交*/
             var vm = this;
             var script = document.createElement("script");  
             //script.src = "https://map.qq.com/api/js?v=2.exp&key=URKBZ-BHWKG-M5LQQ-IMA7D-SOZGS-IZBJ4";       //URKBZ-BHWKG-M5LQQ-IMA7D-SOZGS-IZBJ4
@@ -263,24 +264,43 @@ export default {
 
             script.onload = () => {
                 var geolocation = new qq.maps.Geolocation("URKBZ-BHWKG-M5LQQ-IMA7D-SOZGS-IZBJ4", "anoa");
-                //var opt = {timeout: 8000};
-                geolocation.getLocation(showPosition,showErr)
+                var positionNum = 0
+                var options = {timeout: 8000};
+                geolocation.getLocation(showPosition,showErr,options)
 
-                var showPosition = (res)=> {
-                    vm.F['Hint'](vm,{
-                        ct:res
-                    })
-                    console.log(res);
-                }
+                function showPosition(position) {
+                    var adCode = position.adCode;//邮政编码
+                    var nation = position.nation;//中国
+                    var city = position.city; //城市
+                    var addr = position.addr; //详细地址
+                    var lat = position.lat; //
+                    var lng = position.lng; //火星坐标 //TODO 实现业务代码逻辑
 
-                var showErr = (res) => {
-                    vm.F['Hint'](vm,{
-                        ct:res
-                    })
-                    console.log(res)
-                }
+                    //var nowPlace = position.addr;
+                    // vm.F['Hint'](vm,{
+                    //     ct:nowPlace
+                    // })
+                    vm.province = position.province
+                    vm.city = position.city
+                    vm.district = position.district
+
+
+                    vm.nowPlace = position.province + position.city + position.addr;
+
+                    vm.loading = false
+
+                }; 
+                function showErr() { 
+                    //TODO 如果出错了调用此方法 
+                };
             }
 
+        },
+        setAddress(data){
+            var vm = this;
+            vm.showPicker = false
+            //console.log(data)
+            vm.nowPlace = data.poiaddress + data.poiname
         }
     }
 }
@@ -294,6 +314,7 @@ export default {
 .m-sign > .position i{font-size: 0.8rem;}
 .m-sign > .position >.big{font-size: 0.35rem;color: #568f0e;font-weight: bold;}
 .m-sign > .position > .address{max-width: 6rem; line-height: 1.4;}
+.m-sign > .position > .address i{font-size: 0.28rem; font-weight: bold;}
 .m-sign > .sign{ width: 2.5rem; height: 2.5rem; box-sizing: border-box; border:0.05rem solid #ffc665;border-radius: 50%; position: absolute; top: 4.82rem; left: 50%;margin-left: -1.25rem;cursor: pointer; position: relative;}
 .m-sign > .sign > .txt{position: absolute ;top:0.8rem; left: 0.52rem; font-size: 0.27rem; color:#483c16; } 
 .m-sign > .sign > .txt > .big{font-size: 0.53rem;color: #483c16;}
