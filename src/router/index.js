@@ -186,7 +186,8 @@ export default new Router({
       name: 'dailyAdd',
       meta:{
         index:1.2,
-        title:"写日报"
+        title:"写日报",
+        checkLogin:true,  //调用是否登陆接口
       },
       component: dailyAdd
     },

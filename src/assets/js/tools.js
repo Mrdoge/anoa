@@ -762,4 +762,21 @@ F['botTrigger'] = function(callback){
 	}
 }
 
+//通用接口回调函数
+/**
+ * 
+ * **/
+// F['normalCallback'] = function(data,vm,url){
+//     if(data.code !== 1) {
+//         if (data.code == 1314) {    //未登录状态，固定跳登录页
+//             //location.href = data.retval.url;
+//             vm.$store.state.isLogin = false
+//         } else {
+//             //layer.toast(data.msg);
+//         }
+//     } else {
+        
+//     }
+// }
+
 export default F

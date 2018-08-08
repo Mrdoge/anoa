@@ -110,7 +110,9 @@ export default {
                         ct:res.data.retval.okTip,
                         type:1
                     })
-
+                    
+                    vm.$store.state.isFooterShow = true; //底部是否显示
+                    vm.$store.state.isTopBarShoow = false; //顶部是否显示
                     vm.$router.push({path:'/info/infoIndex'});//跳转到该路由
                     setTimeout(() => {
                         vm.$store.state.isLogin = true;

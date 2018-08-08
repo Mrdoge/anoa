@@ -59,6 +59,8 @@ export default {
     //每个页面加载前的各种处理
     this.beforeEnterPage()
 
+    //进入页面后的各种处理
+    this.afterEnterPage();
   },
   components:{
     botFooter,
@@ -109,6 +111,58 @@ export default {
         localStorage.setItem('ifFromCheck','');
       }
 
+    },
+    afterEnterPage(){
+      var vm = this;
+      vm.$router.afterEach((to,from) => {
+        if (to.meta.checkLogin) {
+          this.axios.post(this.$store.state.httpUrl.login.checkIsLogin)
+          .then((res) => {
+            if (res.data.code == 1) {
+              var isLogin = res.data.retval.isLogin == 1?true:false
+              var loginStorage = JSON.parse(localStorage.getItem('login'));
+              //console.log(loginStorage)
+              if (isLogin) {
+                //所有状态完全ok,可以正常写日报
+              }else{//如果不是登陆状态则悄悄的帮助登陆
+                if (loginStorage) {
+                  vm.silenceLogin(loginStorage.phone_mob,loginStorage.password);
+                }else{
+                  //弹出登陆界面
+                  setTimeout(() => {
+                    vm.$store.state.isLogin = false
+                  },600);
+                }
+              }
+            }else{
+              console.log('checkIsLogin请求失败')
+            }
+          })
+        }
+      })
+    },
+    silenceLogin(phone_mob,password){ //悄悄的帮忙登陆
+      var vm = this;
+      var postData = {
+        account:phone_mob,
+        passWord:password
+      }
+      vm.axios.post(vm.$store.state.httpUrl.login.login,qs.stringify(postData))
+      .then(function (res) {
+          //console.log(res)
+          if (res.data.code == 1) {
+            console.log('登陆成功，就默默的成功')
+          }else{
+            console.log('登陆失败')
+            //写入登陆状态,弹出登陆界面
+            setTimeout(() => {
+              vm.$store.state.isLogin = false
+            },400);
+          }
+      })
+      .catch(function (err) {
+          console.log(err);
+      });
     },
     isLogin(){  //判断是否登陆
       var vm = this;
