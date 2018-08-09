@@ -132,26 +132,27 @@ export default {
 			var vm = this;
 			var url = vm.host + vm.$store.state.myApplyIndex[vm.applyIndex].detailsUrl + '?id=' + vm.applyId;
 			//var url = vm.host + vm.$store.state.myApplyIndex[vm.applyIndex].detailsUrl + '?id=' + 41;
-			vm.axios.post(url)
+			vm.ajax.post(url)
 			.then(function (res) {
 				//console.log(res.data);
-				if (res.data.code == 1) {
-					for(var items in res.data.retval.data){
+				var data = res;
+				if (data.code == 1) {
+					for(var items in data.retval.data){
 						//console.log(vm.data[applyIndex][items])
 						//性别特殊处理
 						if (items == "gender") {
-							res.data.retval.data[items] = res.data.retval.data[items] == 1?'男':'女'
+							data.retval.data[items] = data.retval.data[items] == 1?'男':'女'
 						}
 						//时间特殊处理
 						if (items == 's_time' || items == 'e_time' || items == 'created_time') {
-							res.data.retval.data[items] = vm.F['unixFormat'](res.data.retval.data[items])
+							data.retval.data[items] = vm.F['unixFormat'](data.retval.data[items])
 						}
 						//出生日期特殊处理
 						if (items == 'data_birth') {
-							res.data.retval.data[items] = vm.F['unixFormat'](res.data.retval.data[items]).split(' ')[0]
+							data.retval.data[items] = vm.F['unixFormat'](data.retval.data[items]).split(' ')[0]
 						}
 
-						vm.data[vm.applyIndex][items] = res.data.retval.data[items]
+						vm.data[vm.applyIndex][items] = data.retval.data[items]
 					}
 					//vm.data[applyIndex]
 				}

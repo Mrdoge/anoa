@@ -218,7 +218,6 @@
 </template>
 
 <script>
-var qs = require('qs');
 //var PhotoClip = require('photoclip')
 //PhotoClip = PhotoClip.default
 export default {
@@ -362,12 +361,15 @@ export default {
             }
 
             vm.imgLoading = true;
-            vm.axios.post(url,qs.stringify(postData))
+            vm.ajax.post(url,postData)
             .then((res) => {
-                var data = res.data;
+                var data = res;
                 //console.log(data);
                 if(data.code >= 1){
                     vm.data.avatar = vm.avatarUrl
+                    
+                    //个人资料已变动，需要重新写入缓存
+                    vm.storageUpdate();
                 }else{
                     vm.F['Hint'](vm,{
                         ct:data.msg
@@ -378,16 +380,18 @@ export default {
         },
 		getData(){
 			var vm = this;
-			var url = vm.$store.state.httpUrl.member.getMemberInfo;
-			var userId = localStorage.getItem('userId')
+            var url = vm.$store.state.httpUrl.member.getMemberInfo;
+            var userInfo = JSON.parse(localStorage.getItem('userInfo'));
+            var userId = userInfo.user_id;
+			//var userId = localStorage.getItem('userId')
 			var postData = {
                 userId:userId,
 				type:[1,2,3,4]
 			}
 			//console.log(postData)
-			vm.axios.post(url,qs.stringify(postData))
+			vm.ajax.post(url,postData)
 			.then((res) => {
-				var data = res.data;
+				var data = res;
 				if (data.code >= 1) {
 					var _data = data.retval.data
 					for (var i in _data){
@@ -455,9 +459,9 @@ export default {
             var postData = {
                 avatar:avatar
             }
-            vm.axios.post(url,qs.stringify(postData))
+            vm.ajax.post(url,postData)
             .then((res) => {
-                var data = res.data
+                var data = res
                 if (data.code >= 1) {
                     vm.F['Hint'](vm,{
                         ct:"修改成功",
@@ -569,16 +573,24 @@ export default {
             var url = vm.$store.state.httpUrl.member.editMemberDetail
             
             vm.loading = true
-            vm.axios.post(url,qs.stringify(postData))
+            vm.ajax.post(url,postData)
                 .then((res) => {
-                    var data = res.data
+                    var data = res
                     if (data.code == 1) {
                         vm.F['Hint'](vm,{
                             ct:data.retval.okTip,
                             type:1
                         })
+
+                        //个人资料已变动，需要重新写入缓存
+                        vm.storageUpdate();
+
+                        // setTimeout(() => {
+                        //     window.location.reload();
+                        // },1500);
+                        //编辑完资料去回个人中心首页吧
                         setTimeout(() => {
-                            window.location.reload();
+                            vm.$router.push('/myIndex/myIndex')
                         },1500);
                     }else{
                         vm.F['Hint'](vm,{

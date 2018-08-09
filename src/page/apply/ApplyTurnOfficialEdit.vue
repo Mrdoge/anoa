@@ -43,7 +43,7 @@
 
 <script>
 import memberPicker from '@/components/memberPicker' //联系人选择器
-var qs = require('qs');
+
 export default {
 	name: 'ApplyTurnOfficialEdit',
 	data () {
@@ -104,11 +104,12 @@ export default {
 
 			var postData = vm.form;
             vm.loading = true
-            this.axios.post(this.$store.state.httpUrl.apply.applyTurnOfficial + '/?id=' + vm.applyId,qs.stringify(postData))
+            this.ajax.post(this.$store.state.httpUrl.apply.applyTurnOfficial + '/?id=' + vm.applyId,postData)
             .then(function (res) {
-                if (res.data.code == 1) {
+                var data = res;
+                if (data.code == 1) {
                     vm.F['Hint'](vm,{
-                        ct:res.data.retval.okTip,
+                        ct:data.retval.okTip,
                         type:1
                     })
                     setTimeout(() => {
@@ -118,7 +119,7 @@ export default {
                     vm.loading = false
                 }else{
                     vm.F['Hint'](vm,{
-                        ct:res.data.msg
+                        ct:data.msg
                     })
                 }
             })
@@ -131,11 +132,12 @@ export default {
 			var vm = this;
 			var url = vm.host + vm.$store.state.myApplyIndex[vm.applyIndex].detailsUrl + '?id=' + vm.applyId;
 			//var url = vm.host + vm.$store.state.myApplyIndex[vm.applyIndex].detailsUrl + '?id=' + 41;
-			vm.axios.post(url)
+			vm.ajax.post(url)
 			.then(function (res) {
-				//console.log(res.data);
-				if (res.data.code == 1) {
-					vm.setData(res.data.retval.data)
+                //console.log(res.data);
+                var data = res;
+				if (data.code == 1) {
+					vm.setData(data.retval.data)
 				}
 			})
 			.catch(function (err) {

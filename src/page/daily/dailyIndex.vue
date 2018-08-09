@@ -73,8 +73,6 @@
 import calendar from '@/components/calendar/calendar.vue' //日历组件
 import loading from '@/components/loading'
 
-var qs = require('qs');
-
 export default {
     name: 'dailyIndex',
     data () {
@@ -143,12 +141,13 @@ export default {
                 eTime:vm.nowDate
             }
 
-            this.axios.post(this.$store.state.httpUrl.daily.dailyList,qs.stringify(postData))
+            this.ajax.post(this.$store.state.httpUrl.daily.dailyList,postData)
             .then(function (res) {
-                if(res.data.code == 1){
+                var data = res;
+                if(data.code == 1){
                     //先清除
                     vm.list.splice(0,vm.list.length)
-                    const _data = res.data.retval.list;
+                    const _data = data.retval.list;
                     //console.log(_data);
                     if (_data.length) {
                         vm.loadingData.noDataShow = false

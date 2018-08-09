@@ -114,18 +114,19 @@ export default {
 		var cId = vm.$route.params.cId
 		var url = vm.$store.state.httpUrl.contract.ContractDetails + '?id=' + cId;
 
-		vm.axios.post(url)
+		vm.ajax.post(url)
 		.then((res) => {
 		//console.log(res.data)
-		if (res.data.code >= 1) {
-			var _data = res.data.retval.contractDetailsData;
+		var data = res;
+		if (data.code >= 1) {
+			var _data = data.retval.contractDetailsData;
 			for(var i in _data){
 				vm.$set(vm.data,i,_data[i])
 			}
 
 		}else{
 			vm.F['Hint'](vm,{
-				ct:res.data.msg
+				ct:data.msg
 			})
 		}
 

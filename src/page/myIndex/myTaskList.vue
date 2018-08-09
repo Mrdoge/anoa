@@ -70,9 +70,9 @@ export default {
             var url = vm.$store.state.httpUrl.task.myTaskList;
 
             vm.loadingData.loadingShow = true
-            vm.axios.post(url)
+            vm.ajax.post(url)
             .then((res) => {
-                var data = res.data;
+                var data = res;
                 vm.loadingData.loadingShow = false
                 //console.log(data)
                 if (data.code >= 1) {

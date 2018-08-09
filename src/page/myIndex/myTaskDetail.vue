@@ -149,12 +149,12 @@ export default {
 			var vm = this;
 			var id = vm.$route.params.tId;
 			var url = vm.$store.state.httpUrl.task.mytaskDetail + '?id=' + id;
-			vm.axios.post(url)
+			vm.ajax.post(url)
 			.then((res) => {
-				var data = res.data
+				var data = res
 				//console.log(data);
 				if (data.code >= 1) {
-					var _data = res.data.retval.data;
+					var _data = data.retval.data;
                     for(let i in _data){
                         vm.$set(vm.data,i,_data[i])
                     }
@@ -233,12 +233,13 @@ export default {
                 return false
             }
             vm.loading.form = true
-            this.axios.post(this.$store.state.httpUrl.task.endTask,qs.stringify(postData))
+            this.ajax.post(this.$store.state.httpUrl.task.endTask,postData)
             .then(function (res) {
                 //console.log(res.data);
-                if (res.data.code == 1) {
+                var data = res;
+                if (data.code == 1) {
                     vm.F['Hint'](vm,{
-                        ct:res.data.retval.okTip,
+                        ct:data.retval.okTip,
                         type:1
                     })
                     vm.$store.state.isShadeShow = false
@@ -248,7 +249,7 @@ export default {
 
                 }else{
                     vm.F['Hint'](vm,{
-                        ct:res.data.msg
+                        ct:data.msg
                     })
                 }
                 vm.loading.form = false

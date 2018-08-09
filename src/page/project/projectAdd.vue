@@ -120,12 +120,13 @@ export default {
       //console.log(postData);
       //return false
       vm.loading.form = true
-      vm.axios.post(this.$store.state.httpUrl.project.addProjectRecord,qs.stringify(postData))
+      vm.ajax.post(this.$store.state.httpUrl.project.addProjectRecord,postData)
       .then(function (res) {
           //console.log(res.data);
-          if (res.data.code == 1) {
+          var data = res;
+          if (data.code == 1) {
             vm.F['Hint'](vm,{
-              ct:res.data.retval.okTip,
+              ct:data.retval.okTip,
               type:1
             })
 

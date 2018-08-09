@@ -103,7 +103,6 @@
 <script>
 import picker from 'vue-3d-picker';
 import memberPicker from '@/components/memberPicker' //联系人选择器
-var qs = require('qs');
 
 export default {
     name: 'ApplyVacationEdit',
@@ -294,11 +293,12 @@ export default {
             var postData = vm.form;
 
             vm.loading = true
-            this.axios.post(this.$store.state.httpUrl.apply.applyVacation + '/?id=' + vm.applyId,qs.stringify(postData))
+            this.ajax.post(this.$store.state.httpUrl.apply.applyVacation + '/?id=' + vm.applyId,postData)
             .then(function (res) {
-                if (res.data.code == 1) {
+                var data = res;
+                if (data.code == 1) {
                     vm.F['Hint'](vm,{
-                        ct:res.data.retval.okTip,
+                        ct:data.retval.okTip,
                         type:1
                     })
                     setTimeout(() => {
@@ -308,7 +308,7 @@ export default {
                     vm.loading = false
                 }else{
                     vm.F['Hint'](vm,{
-                        ct:res.data.msg
+                        ct:data.msg
                     })
                 }
             })
@@ -331,20 +331,21 @@ export default {
             if (vm.vacationTypeData.length) {
                 return false
             }
-            vm.axios.post(vm.$store.state.httpUrl.apply.getLeaverType)
+            vm.ajax.post(vm.$store.state.httpUrl.apply.getLeaverType)
             .then(function (res) {
                 //console.log(res.data)
-                if (res.data.code == 1) {
+                var data = res;
+                if (data.code == 1) {
                     //先清空
                     vm.vacationType.items[0].values.splice(0,vm.vacationType.items[0].values.length)
                     vm.vacationTypeData.splice(0,vm.vacationTypeData.length)
-                    for (let i = 0; i < res.data.retval.data.length; i++) {
-                        vm.vacationTypeData.push(res.data.retval.data[i])
-                        vm.vacationType.items[0].values.push(res.data.retval.data[i].name)
+                    for (let i = 0; i < data.retval.data.length; i++) {
+                        vm.vacationTypeData.push(data.retval.data[i])
+                        vm.vacationType.items[0].values.push(data.retval.data[i].name)
                     }
                 }else{
                     vm.F['Hint'](vm,{
-                        ct:res.data.msg
+                        ct:data.msg
                     })
                 }
             })
@@ -358,11 +359,11 @@ export default {
 			var vm = this;
 			var url = vm.host + vm.$store.state.myApplyIndex[vm.applyIndex].detailsUrl + '?id=' + vm.applyId;
 			//var url = vm.host + vm.$store.state.myApplyIndex[vm.applyIndex].detailsUrl + '?id=' + 41;
-			vm.axios.post(url)
+			vm.ajax.post(url)
 			.then(function (res) {
-				//console.log(res.data);
-				if (res.data.code == 1) {
-					vm.setData(res.data.retval.data)
+				var data = res;
+				if (data.code == 1) {
+					vm.setData(data.retval.data)
 				}
 			})
 			.catch(function (err) {

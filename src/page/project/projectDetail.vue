@@ -78,13 +78,14 @@ export default {
 	methods:{
 		getData(){
 			var vm = this;
-			this.axios.post(this.$store.state.httpUrl.project.projectDetail,qs.stringify({
+			this.ajax.post(this.$store.state.httpUrl.project.projectDetail,{
 				proId:vm.pro_id,
-			}))
+			})
 			.then(function (res) {
 				//console.log(res.data);
-				if (res.data.code == 1) {
-					var _data = res.data.retval.data
+				var data = res;
+				if (data.code == 1) {
+					var _data = data.retval.data
 					vm.data.title = _data.title;
 					vm.data.userName = _data.userName;
 					vm.data.address = _data.address;

@@ -38,12 +38,13 @@ export default {
   methods:{
       getData(){
         var vm = this;
-        this.axios.post(this.$store.state.httpUrl.daily.dailyDetalis,qs.stringify({
+        this.ajax.post(this.$store.state.httpUrl.daily.dailyDetalis,{
             daId:vm.daId
-        }))
+        })
         .then(function (res) {
-            if(res.data.code == 1){
-                const _data = res.data.retval.data[0];
+            var data = res;
+            if(data.code == 1){
+                const _data = data.retval.data[0];
                 //console.log(_data);
                 vm.today_desc = _data.today_desc
                 vm.tomorrow_desc = _data.tomorrow_desc

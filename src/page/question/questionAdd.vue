@@ -232,11 +232,12 @@ export default {
 		//console.log(postData);
 		//return false
 		vm.loading.form = true
-		this.axios.post(this.$store.state.httpUrl.qst.addQuestion,qs.stringify(postData))
+		this.ajax.post(this.$store.state.httpUrl.qst.addQuestion,postData)
 		.then(function (res) {
-			if (res.data.code == 1) {
+			var data = res;
+			if (data.code == 1) {
 				vm.F['Hint'](vm,{
-					ct:res.data.retval.okTip,
+					ct:data.retval.okTip,
 					type:1
 				})
 				setTimeout(() => {
@@ -244,7 +245,7 @@ export default {
 				},1500)
 			}else{
 				vm.F['Hint'](vm,{
-					ct:res.data.msg
+					ct:data.msg
 				})
 			}
 			vm.loading.form = false
@@ -256,17 +257,18 @@ export default {
 	  },
 	  getProjectList(){
 		var vm  = this;
-		this.axios.post(this.$store.state.httpUrl.project.projectList)
+		this.ajax.post(this.$store.state.httpUrl.project.projectList)
 		.then(function (res) {
-			if (res.data.code == 1) {
+			var data = res;
+			if (data.code == 1) {
 				//先清除
 				vm.projectList.splice(0,vm.projectList.length)
-				for (let i = 0; i < res.data.retval.list.length; i++) {
-					vm.projectList.push(res.data.retval.list[i])
+				for (let i = 0; i < data.retval.list.length; i++) {
+					vm.projectList.push(data.retval.list[i])
 				}
 			}else{
 				F['Hint'](vm,{
-					ct:res.data.msg
+					ct:data.msg
 				})
 			}
 			//vm.loading.form = false

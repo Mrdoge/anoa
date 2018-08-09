@@ -51,10 +51,10 @@ export default {
 			// }
 			var url = vm.$store.state.httpUrl.my.mySignList;
 			//console.log(url);
-			vm.axios.post(url)
+			vm.ajax.post(url)
 			.then((res) => {
 				//console.log(res.data)
-				var data = res.data;
+				var data = res;
 				if (data.code >= 1) {
 					var list = data.retval.list
 					for (let i = 0; i < list.length; i++) {

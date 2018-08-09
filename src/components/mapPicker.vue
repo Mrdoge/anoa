@@ -7,6 +7,7 @@
         <div class="m-forbotNav" style="height: 2rem;"></div>
         <div class="m-bottom">
             <div class="block f-clear">
+                <div class="btn u-FU_btn" @click="goback">取消<span class="p-loading"></span></div>
                 <div class="btn j-submit u-FU_btn" @click="setAddress">确定<span class="p-loading"></span></div>
             </div>
         </div>
@@ -23,7 +24,7 @@ name: 'mapPicker',
             loc:{}
         }
     },
-    props:['isShow','callback'],
+    props:['isShow','callback','cancel'],
     created(){
         // (function(){
         //     var iframe = document.getElementById('iframepage').contentWindow;
@@ -54,6 +55,10 @@ name: 'mapPicker',
             var vm = this;
             var loc = vm.loc;
             vm.callback(loc);
+        },
+        goback(){
+            var vm = this;
+            vm.cancel()
         }
     }
 }

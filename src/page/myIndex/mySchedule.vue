@@ -73,14 +73,15 @@ export default {
             //修改当前时间
             vm.nowDate = date
 
-            this.axios.post(this.$store.state.httpUrl.mySchedule.mySchedule,qs.stringify({
+            this.ajax.post(this.$store.state.httpUrl.mySchedule.mySchedule,{
                 planTime:date
-            }))
+            })
             .then(function (res) {
                 //console.log(res.data);
-                if(res.data.code == 1){
+                var data = res;
+                if(data.code == 1){
                     vm.list.splice(0,vm.list.length);
-                    var _data = res.data.retval.list;
+                    var _data = data.retval.list;
                     for (let i = 0; i < _data.length; i++) {
                         vm.list.push(_data[i]);
                     }
@@ -115,12 +116,13 @@ export default {
             }
 
             vm.loading = true
-            this.axios.post(this.$store.state.httpUrl.mySchedule.myScheduleAdd,qs.stringify(postData))
+            this.ajax.post(this.$store.state.httpUrl.mySchedule.myScheduleAdd,postData)
             .then(function (res) {
-                if(res.data.code == 1){
+                var data = res;
+                if(data.code == 1){
                     //alert(res.data.retval.okTip)
                     vm.F['Hint'](vm,{
-                        ct:res.data.retval.okTip,
+                        ct:data.retval.okTip,
                         type:1
                     })
                     vm.isModalShow = false;
@@ -149,9 +151,13 @@ export default {
         del(id,index){
             var vm = this;
             var url = vm.$store.state.httpUrl.mySchedule.delSchedule + '?id=' + id;
-            vm.axios.get(url)
+            //var url = vm.$store.state.httpUrl.mySchedule.delSchedule
+            // var postData = {
+            //     id:id
+            // }
+            vm.ajax.post(url)
             .then((res) => {
-                var data = res.data;
+                var data = res;
                 if (data.code >= 1) {
                     vm.F['Hint'](vm,{
                         ct:data.retval.okTip,

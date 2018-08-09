@@ -81,9 +81,9 @@ export default {
 			}
 
 			vm.loading= true;
-			vm.axios.post(url,qs.stringify(postData))
+			vm.ajax.post(url,postData)
 			.then((res) => {
-				var data = res.data;
+				var data = res;
 				if (data.code == 1) {
 					vm.F['Hint'](vm,{
 						ct:data.retval.okTip,

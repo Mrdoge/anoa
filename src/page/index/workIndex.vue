@@ -102,22 +102,11 @@ export default {
   methods:{
     checkIsAdmin(){
       var vm = this;
-      // if (localStorage.getItem('isAdmin')) {     //如果检测到缓存有值
-      //   vm.isAdmin = localStorage.getItem('isAdmin');
-      //   return false
-      // }
-      var url = vm.$store.state.httpUrl.login.checkIsLogin;
-      vm.axios.post(url)
-        .then((res) => {
-          var data = res.data;
-          if (data.code == 1) {
-            vm.isAdmin = data.retval.isAdmin
-          }else{
-            vm.F['Hint'](vm,{
-              ct:data.msg
-            })
-          }
-        })
+      var userInfo = JSON.parse(localStorage.getItem('userInfo'));
+      if (userInfo) {     //如果检测到缓存有值
+        vm.isAdmin = userInfo.is_admin;
+        return false
+      }
     }
   },//methods
   computed:{

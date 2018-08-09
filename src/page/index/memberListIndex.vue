@@ -51,10 +51,10 @@ export default {
             var vm = this;
 
             vm.loadingData.loadingShow = true
-            vm.axios.post(vm.$store.state.httpUrl.member.getUserOrganization)
+            vm.ajax.post(vm.$store.state.httpUrl.member.getUserOrganization)
             .then(function (res) {
-                vm.loadingData.loadingShow = false
-				var data = res.data
+                vm.loadingData.loadingShow = false;
+				var data = res
                 if (data.code == 1) {
                     for (let i = 0; i < data.retval.data.length; i++) {
                         data.retval.data[i].isShow = true   //  默认全部展开
@@ -62,7 +62,7 @@ export default {
 					}
                 }else{
                     vm.F['Hint'](vm,{
-                        ct:res.data.msg
+                        ct:data.msg
                     })
                 }
             })

@@ -22,7 +22,7 @@
 
 
             <router-link class="m-avatarList f-clear" :to="'/myIndex/MyApplyCheck/' + applyIndex + '/' + items.id" v-for="(items,index) in dataList" :key="index" v-if="+applyType == 1">
-                <img :src="items.userAvatar" alt="" class="avatar">
+                <img :src="host + '/' + items.userAvatar" alt="" class="avatar">
                 <div class="right">
                     <div class="name">{{items.userName}}</div>
                     <div class="time">{{unixFormat(items.created_time)}}</div>
@@ -39,7 +39,6 @@
 
 <script>
 import loading from '@/components/loading' //底部导航
-var qs = require('qs');
 export default {
     name: 'myApplyList',
     data () {
@@ -47,6 +46,7 @@ export default {
             applyIcon:this.$store.state.myApplyIndex,
             applyIndex:this.$route.params.index,
             applyType:this.$route.params.type,
+            host:this.$store.state.httpUrl.HOST,
             dataList:[],    //数据
             loading:false, //是否加载中
             botLineShow:false,  //是否显示底边
@@ -119,27 +119,28 @@ export default {
             url = +vm.applyType == 2? vm.$store.state.httpUrl.my.applyList : vm.$store.state.httpUrl.my.applyListWait
 
             vm.loading = true;
-			this.axios.post(url,qs.stringify(postData))
+			this.ajax.post(url,postData)
 			.then(function (res) {
-				//console.log(res.data);
-				if (res.data.code == 1) {
+                //console.log(res.data);
+                var data = res;
+				if (data.code == 1) {
                         vm.loading = false;
-                        var data = res.data.retval;
+                        var _data = data.retval;
                         //console.log(data)
-						if (!data) { //如果返回空值
+						if (!_data) { //如果返回空值
 							vm.dataList.splice(0,vm.dataList.length); //显示暂无数据
 							return false
 						}
 						//console.log(data)
-                        var count = +data.count;
+                        var count = +_data.count;
 						//console.log(vm.dataList.length,count)
                         if (vm.dataList.length >= count) { //如果已经大于最大值
                             //console.log('已经是最大值')
 							vm.botLineShow = true
 							return false
 						}
-						for (var i = 0; i < data.data.length; i++) {
-							vm.dataList.push(data.data[i])
+						for (var i = 0; i < _data.data.length; i++) {
+							vm.dataList.push(_data.data[i])
 						}
 						vm.page++
                 }

@@ -110,13 +110,26 @@ export default {
                         ct:res.data.retval.okTip,
                         type:1
                     })
+
+                    //永久储存token
+                    var token = res.data.retval.token;
+                    localStorage.setItem('token',token)
+
+                    //储存用户信息
+                    var userInfo = JSON.stringify(res.data.retval.userInfo)
+                    localStorage.setItem('userInfo',userInfo)
+
+
+                    if (window.location.href.indexOf('info/infoIndex') > -1) {
+                        //如果本身是自己，则自己跳自己，触发获取接口数据
+                        vm.$store.state.isFooterShow = true; //底部是否显示
+                        vm.$store.state.isTopBarShoow = false; //顶部是否显示
+                        vm.$router.push({path:'/info/infoIndex'});//跳转到该路由
+                    }
                     
-                    vm.$store.state.isFooterShow = true; //底部是否显示
-                    vm.$store.state.isTopBarShoow = false; //顶部是否显示
-                    vm.$router.push({path:'/info/infoIndex'});//跳转到该路由
                     setTimeout(() => {
                         vm.$store.state.isLogin = true;
-                        localStorage.setItem('userId',res.data.retval.userId)
+                        //localStorage.setItem('userId',res.data.retval.userId)
                     },2000)
                 }else{
                     vm.F['Hint'](vm,{

@@ -112,11 +112,12 @@ export default {
 
             vm.$set(vm.loading,index,true)
             var url = vm.$store.state.httpUrl.daily.dailyAdd + '?id=' + vm.$route.params.daId
-            vm.axios.post(url,qs.stringify(postData))
+            vm.ajax.post(url,postData)
             .then(function (res) {
-                if (res.data.code == 1) {
+                var data = res;
+                if (data.code == 1) {
                     vm.F['Hint'](vm,{
-                        ct:res.data.retval.okTip,
+                        ct:data.retval.okTip,
                         type:1
                     })
 
@@ -127,7 +128,7 @@ export default {
                     // },1500)
                 }else{
                     vm.F['Hint'](vm,{
-                        ct:res.data.msg
+                        ct:data.msg
                     })
                 }
 
@@ -141,12 +142,13 @@ export default {
         },
         getData(){
             var vm = this;
-            this.axios.post(this.$store.state.httpUrl.daily.dailyDetalis,qs.stringify({
+            this.ajax.post(this.$store.state.httpUrl.daily.dailyDetalis,{
                 daId:vm.daId
-            }))
+            })
             .then(function (res) {
-                if(res.data.code == 1){
-                    const _data = res.data.retval.data[0];
+                var data = res;
+                if(data.code == 1){
+                    const _data = data.retval.data[0];
                     //console.log(_data);
                     vm.form.todayDesc = _data.today_desc
                     vm.form.tomorrowDesc = _data.tomorrow_desc

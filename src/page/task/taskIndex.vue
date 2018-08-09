@@ -94,9 +94,9 @@ export default {
             }
 
             vm.loadingData.loadingShow = true
-            vm.axios.post(url,qs.stringify(postData))
+            vm.ajax.post(url,postData)
             .then((res) => {
-                var data = res.data;
+                var data = res;
                 vm.loadingData.loadingShow = false
                 //console.log(data)
                 if (data.code >= 1) {

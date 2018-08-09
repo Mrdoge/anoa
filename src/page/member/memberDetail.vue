@@ -230,9 +230,9 @@ export default {
 				type:[1,2,3,4]
 			}
 			//console.log(postData)
-			vm.axios.post(url,qs.stringify(postData))
+			vm.ajax.post(url,postData)
 			.then((res) => {
-				var data = res.data;
+				var data = res;
 				if (data.code >= 1) {
 					var _data = data.retval.data
 					for (var i in _data){

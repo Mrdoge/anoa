@@ -227,11 +227,12 @@ export default {
 			var postData = vm.form;
 			//console.log(postData)
             vm.loading = true
-            this.axios.post(this.$store.state.httpUrl.apply.applyTransfer + '/?id=' + vm.applyId,qs.stringify(postData))
+            this.ajax.post(this.$store.state.httpUrl.apply.applyTransfer + '/?id=' + vm.applyId,postData)
             .then(function (res) {
-                if (res.data.code == 1) {
+				var data = res;
+                if (data.code == 1) {
                     vm.F['Hint'](vm,{
-                        ct:res.data.retval.okTip,
+                        ct:data.retval.okTip,
                         type:1
                     })
                     setTimeout(() => {
@@ -241,7 +242,7 @@ export default {
                     vm.loading = false
                 }else{
                     vm.F['Hint'](vm,{
-                        ct:res.data.msg
+                        ct:data.msg
                     })
                 }
             })
@@ -254,9 +255,9 @@ export default {
 			if (vm.sectionData.length) {
 				return false
 			}
-            vm.axios.post(vm.$store.state.httpUrl.section.getAllSectionModel)
+            vm.ajax.post(vm.$store.state.httpUrl.section.getAllSectionModel)
             .then(function (res) {
-				var data = res.data
+				var data = res
                 if (data.code == 1) {
                     for (let i = 0; i < data.retval.data.length; i++) {
 						vm.sectionData.push(data.retval.data[i])
@@ -264,7 +265,7 @@ export default {
 					}
                 }else{
                     vm.F['Hint'](vm,{
-                        ct:res.data.msg
+                        ct:data.msg
                     })
 				}
 
@@ -280,11 +281,12 @@ export default {
 			var vm = this;
 			var url = vm.host + vm.$store.state.myApplyIndex[vm.applyIndex].detailsUrl + '?id=' + vm.applyId;
 			//var url = vm.host + vm.$store.state.myApplyIndex[vm.applyIndex].detailsUrl + '?id=' + 41;
-			vm.axios.post(url)
+			vm.ajax.post(url)
 			.then(function (res) {
 				//console.log(res.data);
-				if (res.data.code == 1) {
-					vm.setData(res.data.retval.data)
+				var data = res;
+				if (data.code == 1) {
+					vm.setData(data.retval.data)
 				}
 			})
 			.catch(function (err) {

@@ -100,34 +100,47 @@ export default {
 		getData(){
 			var vm = this;
 			var url = vm.$store.state.httpUrl.member.getMemberInfo;
-			var userId = localStorage.getItem('userId')
-			var postData = {
-				userId:userId,
-				type:[1]
-			}
-			//console.log(postData)
-			vm.axios.post(url,qs.stringify(postData))
-			.then((res) => {
-				var data = res.data;
-				if (data.code >= 1) {
-					var _data = data.retval.data
-					for (var i in _data){
-						for (var j in vm.data){
-							if (i == j) {
-								vm.data[j] = _data[i]
-							}
-						}
-					}
-				}else{
-					vm.F['Hint'](vm,{
-						ct:data.msg
-					})
-				}
+            //var userId = localStorage.getItem('userId')
+            var userInfo = JSON.parse(localStorage.getItem('userInfo'))
+            if (userInfo) {
+                for (var i in userInfo){
+                    for (var j in vm.data){
+                        if (i == j) {
+                            vm.data[j] = userInfo[i]
+                        }
+                    }
+                }
+            }else{
+                vm.storageUpdate()
+            }
+            
+			// var postData = {
+			// 	userId:userId,
+			// 	type:[1]
+            // }
+            
+			// vm.ajax.post(url,postData)
+			// .then((res) => {
+			// 	var data = res;
+			// 	if (data.code >= 1) {
+			// 		var _data = data.retval.data
+			// 		for (var i in _data){
+			// 			for (var j in vm.data){
+			// 				if (i == j) {
+			// 					vm.data[j] = _data[i]
+			// 				}
+			// 			}
+			// 		}
+			// 	}else{
+			// 		vm.F['Hint'](vm,{
+			// 			ct:data.msg
+			// 		})
+			// 	}
 
-				setTimeout(() => {
-					vm.$previewRefresh()
-				},1000);
-			})
+			// 	setTimeout(() => {
+			// 		vm.$previewRefresh()
+			// 	},1000);
+			// })
 		},
 		unixFormat(timestamp){
             var vm = this;

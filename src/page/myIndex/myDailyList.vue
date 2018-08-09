@@ -16,7 +16,6 @@
 </template>
 
 <script>
-var qs = require('qs')
 import loading from '@/components/loading'
 export default {
 	name: 'MyDailyList',
@@ -68,9 +67,9 @@ export default {
 			}
 			var url = vm.$store.state.httpUrl.my.myDaily
 			vm.loadingData.loadingShow = true
-			vm.axios.post(url,qs.stringify(postData))
+			vm.ajax.post(url,postData)
 			.then((res) => {
-				var data = res.data;
+				var data = res;
 				//console.log(data)
 				vm.loadingData.loadingShow = false
 				if (data.code >= 1) {

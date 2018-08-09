@@ -218,11 +218,12 @@ export default {
 			var postData = vm.form;
 			//console.log(postData)
             vm.loading = true
-            this.axios.post(this.$store.state.httpUrl.apply.applyTransfer,qs.stringify(postData))
+            this.ajax.post(this.$store.state.httpUrl.apply.applyTransfer,postData)
             .then(function (res) {
-                if (res.data.code == 1) {
+				var data = res;
+                if (data.code == 1) {
                     vm.F['Hint'](vm,{
-                        ct:res.data.retval.okTip,
+                        ct:data.retval.okTip,
                         type:1
                     })
                     // setTimeout(() => {
@@ -233,7 +234,7 @@ export default {
                     vm.loading = false
                 }else{
                     vm.F['Hint'](vm,{
-                        ct:res.data.msg
+                        ct:data.msg
                     })
                 }
             })
@@ -246,9 +247,9 @@ export default {
 			if (vm.sectionData.length) {
 				return false
 			}
-            vm.axios.post(vm.$store.state.httpUrl.section.getAllSectionModel)
+            vm.ajax.post(vm.$store.state.httpUrl.section.getAllSectionModel)
             .then(function (res) {
-				var data = res.data
+				var data = res
                 if (data.code == 1) {
                     for (let i = 0; i < data.retval.data.length; i++) {
 						vm.sectionData.push(data.retval.data[i])
@@ -256,7 +257,7 @@ export default {
 					}
                 }else{
                     vm.F['Hint'](vm,{
-                        ct:res.data.msg
+                        ct:data.msg
                     })
                 }
             })

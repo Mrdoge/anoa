@@ -52,7 +52,6 @@
 
 <script>
 import memberPicker from '@/components/memberPicker' //联系人选择器
-var qs = require('qs');
 export default {
 	name: 'ApplySalaryAdjust',
 	data () {
@@ -110,11 +109,12 @@ export default {
 
 			var postData = vm.form;
             vm.loading = true
-            this.axios.post(this.$store.state.httpUrl.apply.applySalaryAdjust,qs.stringify(postData))
+            this.ajax.post(this.$store.state.httpUrl.apply.applySalaryAdjust,postData)
             .then(function (res) {
-                if (res.data.code == 1) {
+                var data = res;
+                if (data.code == 1) {
                     vm.F['Hint'](vm,{
-                        ct:res.data.retval.okTip,
+                        ct:data.retval.okTip,
                         type:1
                     })
                     // setTimeout(() => {
@@ -125,7 +125,7 @@ export default {
                     vm.loading = false
                 }else{
                     vm.F['Hint'](vm,{
-                        ct:res.data.msg
+                        ct:data.msg
                     })
                 }
             })

@@ -74,19 +74,20 @@ export default {
                 page:vm.page
             }
             vm.loadingData.loadingShow = true
-            this.axios.post(this.$store.state.httpUrl.qst.questionList,qs.stringify(postData))
+            this.ajax.post(this.$store.state.httpUrl.qst.questionList,postData)
             .then(function (res) {
                 //console.log(res.data);
+                var data = res;
                 vm.loadingData.loadingShow = false
-                if (res.data.code == 1) {
-                    const _data = res.data.retval.data.list;
+                if (data.code == 1) {
+                    const _data = data.retval.data.list;
 
                     if (!_data) { //如果返回空值
                         vm.list.splice(0,vm.list.length); //显示暂无数据
                         return false
                     }
 
-                    var count = +res.data.retval.data.count;
+                    var count = +data.retval.data.count;
                     //console.log(vm.list.length,count)
                     if (vm.list.length >= count && vm.list.length) { //如果已经大于最大值
                         vm.loadingData.botLineShow = true

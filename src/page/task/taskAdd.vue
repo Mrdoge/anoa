@@ -217,11 +217,12 @@ export default {
             // console.log(postData);
             // return false
             vm.loading.form = true
-            this.axios.post(this.$store.state.httpUrl.task.addTask,qs.stringify(postData))
+            this.ajax.post(this.$store.state.httpUrl.task.addTask,postData)
             .then(function (res) {
-                if (res.data.code == 1) {
+                var data = res;
+                if (data.code == 1) {
                     vm.F['Hint'](vm,{
-                        ct:res.data.retval.okTip,
+                        ct:data.retval.okTip,
                         type:1
                     })
                     setTimeout(() => {
@@ -230,7 +231,7 @@ export default {
                     },1500)
                 }else{
                     vm.F['Hint'](vm,{
-                        ct:res.data.msg
+                        ct:data.msg
                     })
                 }
                 vm.loading.form = false

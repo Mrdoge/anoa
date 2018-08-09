@@ -21,7 +21,7 @@
         <div id="tip" style="margin-top: 1rem; margin-bottom: 0.2rem; font-size: 0.26rem; display: none;"></div>
 
         <div id="allmap"></div>
-        <mapPicker :isShow="showPicker" :callback="setAddress"></mapPicker>
+        <mapPicker :isShow="showPicker" :callback="setAddress" :cancel="cancel"></mapPicker>
     </div>
 </template>
 
@@ -171,13 +171,14 @@ export default {
             // 	address:'',
             //     fullAddr:"山东分公司的水电费"
             // }
-            this.axios.post(this.$store.state.httpUrl.sign.SignIndex,qs.stringify(postData))
+            this.ajax.post(this.$store.state.httpUrl.sign.SignIndex,postData)
             .then(function (res) {
                 //console.log(res.data);
-                if (res.data.code == 1) {
+                var data = res;
+                if (data.code == 1) {
                     //alert(res.data.retval.okTip);
                     vm.F['Hint'](vm,{
-                        ct:res.data.retval.okTip,
+                        ct:data.retval.okTip,
                         type:1
                     })
                     // setTimeout(() => {
@@ -185,7 +186,7 @@ export default {
                     // },1500)
                 }else{
                     vm.F['Hint'](vm,{
-                        ct:res.data.msg
+                        ct:data.msg
                     })
                 }
             })
@@ -195,11 +196,12 @@ export default {
         },
         getServerTime(){
             var vm = this;
-            this.axios.post(this.$store.state.httpUrl.sign.getServerTime)
+            this.ajax.post(this.$store.state.httpUrl.sign.getServerTime)
             .then(function (res) {
                 //console.log(res.data);
-                if (res.data.code == 1) {
-                    var nowTime = vm.F['unixFormat'](res.data.retval.data)
+                var data = res;
+                if (data.code == 1) {
+                    var nowTime = vm.F['unixFormat'](data.retval.data)
                     nowTime = nowTime.split(' ')[1].split(':')[0] + ':' + nowTime.split(' ')[1].split(':')[1]
                     //console.log(nowTime)
                     vm.serverTime = nowTime
@@ -291,7 +293,10 @@ export default {
 
                 }; 
                 function showErr() { 
-                    //TODO 如果出错了调用此方法 
+                    //TODO 如果出错了调用此方法
+                    vm.F['Hint'](vm,{
+                        ct:123
+                    })
                 };
             }
 
@@ -300,7 +305,14 @@ export default {
             var vm = this;
             vm.showPicker = false
             //console.log(data)
+            if(data.poiname.indexOf('我的位置') > -1){
+                return false
+            }
             vm.nowPlace = data.poiaddress + data.poiname
+        },
+        cancel(){   //取消选择
+            var vm = this;
+            vm.showPicker = false
         }
     }
 }

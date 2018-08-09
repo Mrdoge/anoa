@@ -30,9 +30,9 @@ export default {
             var vm = this;
             var id = this.$route.params.infoId
             var url = vm.$store.state.httpUrl.info.infoDetail + '?id=' + id
-            vm.axios.post(url)
+            vm.ajax.post(url)
             .then((res) => {
-                var data = res.data;
+                var data = res;
                 //console.log(data)
                 if (data.code >= 1) {
                     var _data = data.retval.data;

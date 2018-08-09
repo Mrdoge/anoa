@@ -60,7 +60,8 @@ export default {
     this.beforeEnterPage()
 
     //进入页面后的各种处理
-    this.afterEnterPage();
+    //this.afterEnterPage();
+
   },
   components:{
     botFooter,
@@ -112,88 +113,98 @@ export default {
       }
 
     },
-    afterEnterPage(){
-      var vm = this;
-      vm.$router.afterEach((to,from) => {
-        if (to.meta.checkLogin) {
-          this.axios.post(this.$store.state.httpUrl.login.checkIsLogin)
-          .then((res) => {
-            if (res.data.code == 1) {
-              var isLogin = res.data.retval.isLogin == 1?true:false
-              var loginStorage = JSON.parse(localStorage.getItem('login'));
-              //console.log(loginStorage)
-              if (isLogin) {
-                //所有状态完全ok,可以正常写日报
-              }else{//如果不是登陆状态则悄悄的帮助登陆
-                if (loginStorage) {
-                  vm.silenceLogin(loginStorage.phone_mob,loginStorage.password);
-                }else{
-                  //弹出登陆界面
-                  setTimeout(() => {
-                    vm.$store.state.isLogin = false
-                  },600);
-                }
-              }
-            }else{
-              console.log('checkIsLogin请求失败')
-            }
-          })
-        }
-      })
-    },
-    silenceLogin(phone_mob,password){ //悄悄的帮忙登陆
-      var vm = this;
-      var postData = {
-        account:phone_mob,
-        passWord:password
-      }
-      vm.axios.post(vm.$store.state.httpUrl.login.login,qs.stringify(postData))
-      .then(function (res) {
-          //console.log(res)
-          if (res.data.code == 1) {
-            console.log('登陆成功，就默默的成功')
-          }else{
-            console.log('登陆失败')
-            //写入登陆状态,弹出登陆界面
-            setTimeout(() => {
-              vm.$store.state.isLogin = false
-            },400);
-          }
-      })
-      .catch(function (err) {
-          console.log(err);
-      });
-    },
+    // afterEnterPage(){ //走token模式，这个步骤废弃
+    //   return false
+    //   var vm = this;
+    //   vm.$router.afterEach((to,from) => {
+    //     if (to.meta.checkLogin) {
+    //       this.axios.post(this.$store.state.httpUrl.login.checkIsLogin)
+    //       .then((res) => {
+    //         if (res.data.code == 1) {
+    //           var isLogin = res.data.retval.isLogin == 1?true:false
+    //           var loginStorage = JSON.parse(localStorage.getItem('login'));
+    //           //console.log(loginStorage)
+    //           if (isLogin) {
+    //             //所有状态完全ok,可以正常写日报
+    //           }else{//如果不是登陆状态则悄悄的帮助登陆
+    //             if (loginStorage) {
+    //               vm.silenceLogin(loginStorage.phone_mob,loginStorage.password);
+    //             }else{
+    //               //弹出登陆界面
+    //               setTimeout(() => {
+    //                 vm.$store.state.isLogin = false
+    //               },600);
+    //             }
+    //           }
+    //         }else{
+    //           console.log('checkIsLogin请求失败')
+    //         }
+    //       })
+    //     }
+    //   })
+    // },
+    // isLogin(){  //判断是否登陆
+    //   var vm = this;
+    //   this.axios.post(this.$store.state.httpUrl.login.checkIsLogin)
+    //   .then(function (res) {
+    //       //console.log(res)
+    //       if (res.data.code == 1) {
+    //           var isLogin = res.data.retval.isLogin == 1?true:false
+    //           vm.$store.state.isLogin = isLogin
+
+    //           //不管是否登陆都显示app
+    //           vm.isShowApp = true
+
+    //           //吧登陆信息写入缓存
+    //           var userId = res.data.retval.userId;
+    //           //var isAdmin = res.data.retval.isAdmin;
+    //           localStorage.setItem('userId',userId)
+
+
+    //       }else{
+    //           F['Hint'](vm,{
+    //             ct:res.data.msg
+    //           })
+    //       }
+    //   })
+    //   .catch(function (err) {
+    //       console.log(err);
+    //   });
+    // },
+    // silenceLogin(){ //悄悄的帮忙登陆，更新缓存
+    //   var vm = this;
+    //   var loginStorage = JSON.parse(localStorage.getItem('login'));
+    //   console.log(loginStorage)
+    //   var postData = {
+    //     account:loginStorage.phone_mob,
+    //     passWord:loginStorage.password
+    //   }
+    //   vm.axios.post(vm.$store.state.httpUrl.login.login,qs.stringify(postData))
+    //   .then(function (res) {
+    //       //console.log(res)
+    //       if (res.data.code == 1) {
+    //         console.log('登陆成功，就默默的成功')
+    //       }else{
+    //         console.log('登陆失败')
+    //         //写入登陆状态,弹出登陆界面
+    //         setTimeout(() => {
+    //           vm.$store.state.isLogin = false
+    //         },400);
+    //       }
+    //   })
+    //   .catch(function (err) {
+    //       console.log(err);
+    //   });
+    // },
     isLogin(){  //判断是否登陆
       var vm = this;
-      this.axios.post(this.$store.state.httpUrl.login.checkIsLogin)
-      .then(function (res) {
-          //console.log(res)
-          if (res.data.code == 1) {
-              var isLogin = res.data.retval.isLogin == 1?true:false
-              vm.$store.state.isLogin = isLogin
-
-              //不管是否登陆都显示app
-              vm.isShowApp = true
-
-              //吧登陆信息写入缓存
-              var userId = res.data.retval.userId;
-              //var isAdmin = res.data.retval.isAdmin;
-              localStorage.setItem('userId',userId)
-              //localStorage.setItem('isAdmin',isAdmin)
-              //vm.$store.state.isLogin = false
-              //console.log(vm.$root._router.options.routes)
-              //vm.$root._router.options.routes.splice(0,vm.$root._router.options.route.length)
-
-          }else{
-              F['Hint'](vm,{
-                ct:res.data.msg
-              })
-          }
-      })
-      .catch(function (err) {
-          console.log(err);
-      });
+      var token = localStorage.getItem('token');
+      if (token) {  //是登陆状态
+        vm.$store.state.isLogin = true
+      }else{
+        vm.$store.state.isLogin = false
+      }
+      vm.isShowApp = true
     },
     checkCur(){ //每次刷新判断选中效果
       var vm = this;

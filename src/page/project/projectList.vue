@@ -28,12 +28,13 @@ export default {
     methods:{
         getData(){
             var vm = this;
-            this.axios.post(this.$store.state.httpUrl.project.projectList)
+            this.ajax.post(this.$store.state.httpUrl.project.projectList)
             .then(function (res) {
                 //console.log(res.data);
-                if (res.data.code == 1) {
-                    for (let i = 0; i < res.data.retval.list.length; i++) {
-                        vm.data.push(res.data.retval.list[i])
+                var data = res;
+                if (data.code == 1) {
+                    for (let i = 0; i < data.retval.list.length; i++) {
+                        vm.data.push(data.retval.list[i])
                     }
                 }
             })

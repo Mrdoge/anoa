@@ -556,7 +556,8 @@ export default new Router({
       name: 'settingIndex',
       meta:{
         index:1.1,
-        title:"设置"
+        title:"设置",
+        lastUrl:"/myIndex/myIndex"
       },
       component: settingIndex
     },

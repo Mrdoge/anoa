@@ -64,12 +64,13 @@ export default {
       }
       var url = vm.$store.state.httpUrl.contract.contractList;
       vm.loadingData.loadingShow = true
-      vm.axios.post(url)
+      vm.ajax.post(url)
       .then((res) => {
         //console.log(res.data)
+        var data = res;
         vm.loadingData.loadingShow = false
-        if (res.data.code >= 1) {
-          var _data = res.data.retval.data;
+        if (data.code >= 1) {
+          var _data = data.retval.data;
 
           if (!_data) { //如果返回空值
             vm.data.splice(0,vm.data.length); //显示暂无数据
@@ -93,7 +94,7 @@ export default {
 
         }else{
           vm.F['Hint'](vm,{
-            ct:res.data.msg
+            ct:data.msg
           })
         }
       })

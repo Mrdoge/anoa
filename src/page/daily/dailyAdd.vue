@@ -109,11 +109,12 @@ export default {
             }
 
             vm.$set(vm.loading,index,true)
-            vm.axios.post(vm.$store.state.httpUrl.daily.dailyAdd,qs.stringify(postData))
+            vm.ajax.post(vm.$store.state.httpUrl.daily.dailyAdd,postData)
             .then(function (res) {
-                if (res.data.code == 1) {
+                var data = res;
+                if (data.code == 1) {
                     vm.F['Hint'](vm,{
-                        ct:res.data.retval.okTip,
+                        ct:data.retval.okTip,
                         type:1
                     })
 
@@ -124,7 +125,7 @@ export default {
                     // },1500)
                 }else{
                     vm.F['Hint'](vm,{
-                        ct:res.data.msg
+                        ct:data.msg
                     })
                 }
 

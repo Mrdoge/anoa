@@ -108,16 +108,19 @@ export default {
     },
     created(){
         var vm = this;
-        vm.getData();
+
+        if (localStorage.getItem('token')) {
+            vm.getData();
+        }
     },
     methods:{
         getData(){
             var vm = this;
             var url = vm.$store.state.httpUrl.info.infoIndex;
 
-            vm.axios.post(url)
+            vm.ajax.post(url)
             .then((res) => {
-                var data = res.data
+                var data = res
 
                 if (data.code == 1) {
                     //vm.typeList[i].count = +data.retval.count

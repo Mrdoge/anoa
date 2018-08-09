@@ -114,9 +114,9 @@ export default {
         },
         getUserOrganization(){
 			var vm = this;
-            vm.axios.post(vm.$store.state.httpUrl.member.getUserOrganization)
+            vm.ajax.post(vm.$store.state.httpUrl.member.getUserOrganization)
             .then(function (res) {
-				var data = res.data
+				var data = res
 				//console.log(data)
                 if (data.code == 1) {
                     for (let i = 0; i < data.retval.data.length; i++) {
@@ -136,9 +136,9 @@ export default {
 		},
 		getUserHistorySelect(){
 			var vm = this;
-            vm.axios.post(vm.$store.state.httpUrl.apply.getUserHistorySelect)
+            vm.ajax.post(vm.$store.state.httpUrl.apply.getUserHistorySelect)
             .then(function (res) {
-				var data = res.data
+				var data = res
 				//console.log(data)
                 if (data.code == 1) {
                     for (let i = 0; i < data.retval.data.length; i++) {

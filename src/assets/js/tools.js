@@ -513,7 +513,8 @@ F['imgUpload'] = function(vm,dom,opt){
         return false
     }
 
-
+    var _beforeCall = opt.beforeCall || function(){};
+    _beforeCall()
     F['lrz'](file,imgSubmit)
     // var reader = new FileReader();	//这是一个很牛逼的js原生对象
     // reader.readAsDataURL(file);
@@ -555,7 +556,7 @@ F['imgUpload'] = function(vm,dom,opt){
         var errCall = opt.errCall || function(){};
 		postdata = postdata || {imgResour:''};
 
-        
+        //提交到服务器的时候再次执行一次loading
         beforeCall()
         lock = true;
         dom.classList.add("z-loading");
@@ -762,21 +763,6 @@ F['botTrigger'] = function(callback){
 	}
 }
 
-//通用接口回调函数
-/**
- * 
- * **/
-// F['normalCallback'] = function(data,vm,url){
-//     if(data.code !== 1) {
-//         if (data.code == 1314) {    //未登录状态，固定跳登录页
-//             //location.href = data.retval.url;
-//             vm.$store.state.isLogin = false
-//         } else {
-//             //layer.toast(data.msg);
-//         }
-//     } else {
-        
-//     }
-// }
+
 
 export default F

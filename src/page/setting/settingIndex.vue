@@ -32,9 +32,9 @@ export default {
             var url = vm.$store.state.httpUrl.loginOut;
 
             vm.loading = true
-            vm.axios.post(url)
+            vm.ajax.post(url)
             .then((res) => {
-                var data = res.data;
+                var data = res;
                 if (data.code >= 1) {
                     vm.F['Hint'](vm,{
                         ct:data.retval.okTip,
@@ -43,8 +43,10 @@ export default {
                     setTimeout(() => {
                         //window.location.reload();
                         //vm.$router.push('/info/infoIndex')
-                        localStorage.setItem('userId','')   //清空userId
+                        //localStorage.setItem('userId','')   //清空userId
                         //localStorage.setItem('isAdmin','')   //清空isAdmin
+                        localStorage.setItem('token','');
+                        localStorage.setItem('userInfo','');
                         window.location.href = window.location.protocol + '//' + window.location.host
                     },1000);
                 }else{

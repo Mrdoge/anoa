@@ -104,13 +104,13 @@ export default {
             }
             vm.loadingData.loadingShow = true
             var url = this.$store.state.httpUrl.info.myInfoList
-            vm.axios.post(url,qs.stringify(postData))
+            vm.ajax.post(url,postData)
             .then((res) => {
-                var data = res.data;
+                var data = res;
                 //console.log(data);
                 vm.loadingData.loadingShow = false
                 if (data.code >= 1) {
-                    const _data = res.data.retval.data.data;
+                    const _data = data.retval.data.data;
 
                     if (!_data) { //如果返回空值
                         vm.loadingData.noDataShow = true
@@ -118,7 +118,7 @@ export default {
                         return false
                     }
 
-                    var count = +res.data.retval.data.total_count;
+                    var count = +data.retval.data.total_count;
                     if (vm.list.length >= count) { //如果已经大于最大值
                         vm.loadingData.botLineShow = true
                         return false
@@ -139,9 +139,9 @@ export default {
         setIsRead(id){  //标记已读未读
             var vm = this;
             var url = vm.$store.state.httpUrl.info.editInfoStatus + '?id=' + id
-            vm.axios.post(url)
+            vm.ajax.post(url)
                 .then((res) => {
-                    var data = res.data;
+                    var data = res;
                 })
         }
     }

@@ -157,14 +157,14 @@ export default {
     methods:{
         getData(){
             var vm = this;
-            this.axios.post(this.$store.state.httpUrl.qst.questionDetail,qs.stringify({
+            this.ajax.post(this.$store.state.httpUrl.qst.questionDetail,{
                 qId:vm.qId,
-                //page_size:5
-            }))
+            })
             .then(function (res) {
                 //console.log(res.data);
-                if (res.data.code == 1) {
-                    var _data = res.data.retval.data;
+                var data = res;
+                if (data.code == 1) {
+                    var _data = data.retval.data;
                     for(let i in _data){
                         vm.$set(vm.data,i,_data[i])
                     }
@@ -246,12 +246,13 @@ export default {
                 return false
             }
             vm.loading.form = true
-            this.axios.post(this.$store.state.httpUrl.qst.endQuestion,qs.stringify(postData))
+            this.ajax.post(this.$store.state.httpUrl.qst.endQuestion,postData)
             .then(function (res) {
                 //console.log(res.data);
-                if (res.data.code == 1) {
+                var data = res;
+                if (data.code == 1) {
                     vm.F['Hint'](vm,{
-                        ct:res.data.retval.okTip,
+                        ct:data.retval.okTip,
                         type:1
                     })
                     vm.$store.state.isShadeShow = false
@@ -261,7 +262,7 @@ export default {
 
                 }else{
                     vm.F['Hint'](vm,{
-                        ct:res.data.msg
+                        ct:data.msg
                     })
                 }
                 vm.loading.form = false

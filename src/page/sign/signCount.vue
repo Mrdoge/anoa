@@ -118,24 +118,25 @@ export default {
 				sId:"",
 				status:""
 			}
-			this.axios.post(this.$store.state.httpUrl.sign.signList,qs.stringify(postData))
+			this.ajax.post(this.$store.state.httpUrl.sign.signList,postData)
 			.then(function (res) {
 				//console.log(res.data);
-				if (res.data.code == 1) {
+				var data = res;
+				if (data.code == 1) {
 					//先清空
 					vm.data.splice(0,vm.data.length)
-					for (let i = 0; i < res.data.retval.list.length; i++) {	//打卡人员数据
-						vm.data.push(res.data.retval.list[i])
+					for (let i = 0; i < data.retval.list.length; i++) {	//打卡人员数据
+						vm.data.push(data.retval.list[i])
 					}
 					if (!vm.sectionData.length) {
-						for (let i = 0; i < res.data.retval.secList.length; i++) {
-							vm.sectionData.push(res.data.retval.secList[i])
+						for (let i = 0; i < data.retval.secList.length; i++) {
+							vm.sectionData.push(data.retval.secList[i])
 						}						
 					}
 
 				}else{
 					vm.F['Hint']({
-						ct:res.data.msg
+						ct:data.msg
 					})
 				}
 			})

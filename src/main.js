@@ -16,8 +16,13 @@ import lrz from 'lrz'               //图片压缩转base64，带自动纠正ios
 //ajax请求
 import axios from 'axios'
 import VueAxios from 'vue-axios'
+import ajax from './assets/js/ajax'   //自己封装的axios方法
 
+//所有接口
 import httpUrl from './assets/js/http_url.js'
+
+//更新缓存方法
+import storageUpdate from './assets/js/storageUpdate'
 
 Vue.config.productionTip = false
 Vue.use(VueAxios,axios)
@@ -29,6 +34,8 @@ Vue.use(VueLazyLoad,{
 })
 //Vue.use(imageClipper)
 Vue.prototype.F = F
+Vue.prototype.ajax = ajax
+Vue.prototype.storageUpdate = storageUpdate
 window.lrz = lrz
 
 //个人中心我的申请图标
@@ -143,8 +150,10 @@ const store = new Vuex.Store({
   }
 })
 
+
 /* eslint-disable no-new */
-new Vue({
+/*把vue给到一个全局变量，方便控制app（封装ajax用到）*/
+window.vueApp = new Vue({
   el: '#app',
   router,
   store,
