@@ -67,7 +67,7 @@ export default {
 		},
         getData(){
             var vm = this;
-            if (vm.loadingData.loadingShow || vm.loadingData.botLineShow) {
+            if (vm.loadingData.loadingShow || vm.loadingData.botLineShow || vm.loadingData.noDataShow) {
                 return false
             }
             var postData = {
@@ -84,6 +84,7 @@ export default {
 
                     if (!_data) { //如果返回空值
                         vm.list.splice(0,vm.list.length); //显示暂无数据
+                        vm.loadingData.noDataShow = true
                         return false
                     }
 

@@ -295,7 +295,7 @@ export default {
                 function showErr() { 
                     //TODO 如果出错了调用此方法
                     vm.F['Hint'](vm,{
-                        ct:123
+                        ct:"定位失败"
                     })
                 };
             }

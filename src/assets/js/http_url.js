@@ -1,8 +1,8 @@
-let localhostDev = false;
+let localhostDev = true;
 //如果是本地开发，就把localhostDev 设置成true，连接就是拼成‘http://localhost:8080/api/test’
 //生产环境，就把localhostDev 设置成false，连接就是拼成http://www.gdasjs.com
-let _host= localhostDev ? 'http://192.168.1.230/BusinessProject/www.anoa.de' : 'http://anoa.xilide.vip';
-//let _host= localhostDev ? 'http://192.168.1.230/BusinessProject/www.anoa.de' : 'http://www.gdasjs.com';
+//let _host= localhostDev ? 'http://192.168.1.230/BusinessProject/www.anoa.de' : 'http://anoa.xilide.vip';
+let _host= localhostDev ? 'http://192.168.1.230/BusinessProject/www.anoa.de' : 'http://www.gdasjs.com';
 //let _host= localhostDev ? 'http://192.168.1.222' : 'http://www.gdasjs.com';  //本地打包测试用
 
 //问题中心接口
@@ -108,12 +108,15 @@ const seting = {
     editPassword:_host + '/wap/system/editPassword',    //修改密码
 }
 
+//工作台banner接口
+const banner = _host + '/wap/Banner/bannerList'
+
 export default{
     HOST:_host,
     temp: _host + '/template',
-    bannerImg: [
+    bannerImg: [//banner图片
         _host + '/template/wap/public/img/workindex.jpg',
-    ], //banner图片
+    ], 
     exampleImg: _host + '/template/wap/public/img/example.jpg', //范文示例图
     imgUpload: _host + '/wap/Upload/imgUpload', //图片上传接口
     loginOut: _host + '/wap/System/loginOut', //退出登良
@@ -131,5 +134,6 @@ export default{
     my,
     info,
     task,
-    seting
+    seting,
+    banner  //banner接口
 }

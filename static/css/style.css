@@ -453,4 +453,8 @@ i,.iconfont{font-family: iconfont; font-style: normal;}
   }
 
   /*swiper样式修改*/
-  .swiper-pagination-bullet-active{background-color: #db3752 !important;}
+  .swiper-pagination-bullet-active{background-color: #3a86d9 !important;}
+  .swiper-pagination{position: absolute !important; left: 50% !important; bottom: 0.2rem !important; transform: translateX(-50%) !important;}
+  .swiper-pagination .swiper-pagination-bullet{margin-left: 0.1rem;}
+  .swiper-pagination .swiper-pagination-bullet:first-child{margin-left: 0;}
+  .swiper-slide img{width: 100% !important; height: 100% !important;}
