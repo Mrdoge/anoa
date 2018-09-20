@@ -620,66 +620,6 @@ F['getScopeDate'] = function(start,end){
 作用：计算时间差，返回天数（请假）
 使用：F['betweenDay'](开始时间,结束时间)
 */
-
-// F['betweenDay'] = function(start,end){
-//     //console.log(start,end)
-//     start = start || new Date(end)
-//     end = end || new Date(end)
-
-//     var s_time = Date.parse(new Date(start));
-//     var e_time = Date.parse(new Date(end))
-//     //console.log(e_time,s_time)
-//     var hour = 60 * 60 * 1000;
-//     var days = 0.0;
-//     var half = 0.5;
-//     var allDay = 1.0;
-
-//     var n = (new Date(end).getTime() - new Date(start).getTime()) / (hour * 24);
-//     if (n < 0) {   //结束时间大于开始时间
-//         return false
-//     }
-//     //console.log(n)
-//     //如果是同一天
-//     if(n < 1){
-//         if(n <= 0.125){    //半天
-//             days += half
-//         }else{          //一天
-//             days += allDay
-//         }
-//     }else{  //如果不是同一天
-//         //先算开始多出来的值
-//         //console.log(new Date(start).getHours())
-//         if (new Date(start).getHours() <= 12) {  //上午
-//             days += half
-//         }else{  //下午
-//             if (new Date(end).getHours() <= 12){    //如果结束日期是上午
-//                 days += allDay
-//             }else{
-//                 days += 1.5
-//             }
-            
-//         }
-
-//         //计算相隔天数
-//         days += parseInt(n - 1)
-
-//         days += 0.5    //我也不知道为啥，加上0.5就对了
-
-//         //最后算后面多出来的值
-//         if (new Date(end).getHours() <= 12) {  //上午
-//             days += half
-//         }else{  //下午
-//             days += allDay
-//         }
-
-//     }
-
-//     return days
-//     //console.log(days)
-//     //var rest = (e_time - s_time)/(9 * 60 * 60 * 1000);
-//     //console.log(rest)
-// }
-
 F['betweenDay'] = function(start,end){
     //console.log(start,end)
     start = start || new Date(end)
@@ -763,6 +703,32 @@ F['botTrigger'] = function(callback){
 	}
 }
 
+//判断文件类型，返回后缀以及图标路径
+F['fileType'] = function(fileUrl,temp){
+    if (!fileUrl) {
+        console.log('请传入文件地址');
+        return false
+    }
+    var obj = {
+        icon:temp + '/wap/public/img/whatFile.png',
+        filetype:""
+    }
+    var url = ""
+    if (fileUrl.indexOf('doc') > -1 || fileUrl.indexOf('docx') > -1) {
+        obj.icon = temp + '/wap/public/img/word.png'
+    }
+    if (fileUrl.indexOf('ppt') > -1 || fileUrl.indexOf('pptx') > -1) {
+        obj.icon = temp + '/wap/public/img/ppt.png'
+    }
+    if (fileUrl.indexOf('xls') > -1 || fileUrl.indexOf('xlsx') > -1) {
+        obj.icon = temp + '/wap/public/img/xls.png'
+    }
+    if (fileUrl.indexOf('txt') > -1) {
+        obj.icon = temp + '/wap/public/img/txt.png'
+    }
 
+    obj.filetype = fileUrl.split('.')[1];
+    return obj
+}
 
 export default F

@@ -45,6 +45,10 @@ axios.interceptors.response.use(response => {
 function checkStatus (response) {
   // 如果状态码正常就直接返回数据,这里的状态码是htttp响应状态码有400，500等，不是后端自定义的状态码
   if (response && ((response.status === 200 || response.status === 304 || response.status === 400))) {
+    if (+response.data.code == 0 && response.data.msg == '非法请求') {
+      response.data.msg = '请重新登陆'
+      vueApp.$store.state.isLogin = false
+    }
     return response.data // 直接返回http response响应的data,此data会后端返回的数据数据对象，包含后端自定义的code,message,data属性
   }
   return { // 自定义网络异常对象

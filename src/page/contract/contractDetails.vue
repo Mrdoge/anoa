@@ -1,66 +1,134 @@
 <template>
     <div>
-		<div class="m-borderTitle"><span>合同编号</span></div>
-		<div class="m-normalList">{{data.contract_number?data.contract_number:'-'}}</div>
+		<!--文件循环体-->
+		<template v-if="data.file_url.length">
+			<a :href="host + '/' + items" class="m-docList f-clear" v-for="(items,index) in data.file_url" :key="index + 'file'">
+				<div class="left">
+					<img :src="fileType(items.file_url).icon" alt="">
+				</div>
+				<div class="right">
+					<div class="title f-txtof_3">{{items.file_name}}.{{fileType(items.file_url).filetype}}</div>
+					<div class="time"><i class="icon icon-shijian"></i>{{unixFormat(items.created_time)}}</div>
+				</div>
+			</a>
 
-		<div class="m-borderTitle"><span>合同名称</span></div>
-		<div class="m-normalList">{{data.contract_name?data.contract_name:'-'}}</div>
+			<div style="height:0.1rem; background-color:#ececeb;"></div>
+		</template>
+		<!--文件循环体 end-->
 
-		<div class="m-borderTitle"><span>项目</span></div>
-		<div class="m-normalList">{{data.title?data.title:'-'}}</div>
 
-		<div class="m-borderTitle"><span>签订时间</span></div>
-		<div class="m-normalList">{{data.sign_time?unixFormat(data.sign_time):'-'}}</div>
+		<!--合同主体信息-->
+		<div class="m-contractContent">
+			<div class="list f-clear">
+				<div class="left">合同编号：</div>
+				<div class="right">{{data.contract_number?data.contract_number:'-'}}</div>
+			</div>
 
-		<div class="m-borderTitle"><span>甲方单位</span></div>
-		<div class="m-normalList">{{data.owner?data.owner:'-'}}</div>
-		<div class="m-borderTitle"><span>甲方合同负责人</span></div>
-		<div class="m-normalList">{{data.owner_man?data.owner_man:'-'}}</div>
-		<div class="m-borderTitle"><span>甲方合同负责人联系方式</span></div>
-		<div class="m-normalList">{{data.owner_man_tel?data.owner_man_tel:'-'}}</div>
+			<div class="list f-clear">
+				<div class="left">合同名称：</div>
+				<div class="right">{{data.contract_name?data.contract_name:'-'}}</div>
+			</div>
 
-		<div class="m-borderTitle"><span>乙方单位</span></div>
-		<div class="m-normalList">{{data.second?data.second:'-'}}</div>
-		<div class="m-borderTitle"><span>乙方合同负责人</span></div>
-		<div class="m-normalList">{{data.second_man?data.second_man:'-'}}</div>
-		<div class="m-borderTitle"><span>乙方合同负责人联系方式</span></div>
-		<div class="m-normalList">{{data.second_man_tel?data.second_man_tel:'-'}}</div>
+			<div class="list f-clear">
+				<div class="left">项目：</div>
+				<div class="right">{{data.title?data.title:'-'}}</div>
+			</div>
 
-		<div class="m-borderTitle"><span>开始日期</span></div>
-		<div class="m-normalList">{{data.s_time?unixFormat(data.s_time):'-'}}</div>
-		<div class="m-borderTitle"><span>结束日期</span></div>
-		<div class="m-normalList">{{data.e_time?unixFormat(data.e_time):'-'}}</div>
+			<div class="list f-clear">
+				<div class="left">签订时间：</div>
+				<div class="right">{{data.sign_time?data.sign_time:'-'}}</div>
+			</div>
 
-		<div class="m-borderTitle"><span>总工期天数</span></div>
-		<div class="m-normalList">{{data.total_periods?data.total_periods:'-'}}</div>
-		<div class="m-borderTitle"><span>合同总金额</span></div>
-		<div class="m-normalList">{{data.total_price?data.total_price:'-'}}</div>
-		<div class="m-borderTitle"><span>合同预付款</span></div>
-		<div class="m-normalList">{{data.prepay?data.prepay:'-'}}</div>
-		<div class="m-borderTitle"><span>合同尾款</span></div>
-		<div class="m-normalList">{{data.final?data.final:'-'}}</div>
-		
-		
-		<div class="m-borderTitle"><span>发票类型</span></div>
-		<div class="m-normalList">{{data.invoice_type?invoice_type[+data.invoice_type].name:'-'}}</div>
-		<div class="m-borderTitle"><span>发票税率</span></div>
-		<div class="m-normalList">{{data.invoice_per?data.invoice_per:'-'}}</div>
+			<div class="list f-clear">
+				<div class="left">甲方单位：</div>
+				<div class="right">{{data.owner?data.owner:'-'}}</div>
+			</div>
+			<div class="list f-clear">
+				<div class="left">甲方负责人：</div>
+				<div class="right">{{data.owner_man?data.owner_man:'-'}}</div>
+			</div>
+			<div class="list f-clear">
+				<div class="left">甲方负责人电话：</div>
+				<div class="right">{{data.owner_man_tel?data.owner_man_tel:'-'}}</div>
+			</div>
+			<div class="list f-clear">
+				<div class="left">乙方单位：</div>
+				<div class="right">{{data.second?data.second:'-'}}</div>
+			</div>
+			<div class="list f-clear">
+				<div class="left">乙方负责人：</div>
+				<div class="right">{{data.second_man?data.second_man:'-'}}</div>
+			</div>
+			<div class="list f-clear">
+				<div class="left">乙方合责人电话：</div>
+				<div class="right">{{data.second_man_tel?data.second_man_tel:'-'}}</div>
+			</div>
 
-	
-		<div class="m-borderTitle"><span>法人代表</span></div>
-		<div class="m-normalList">{{data.representative?data.representative:'-'}}</div>
+			<div class="list f-clear">
+				<div class="left">开始日期：</div>
+				<div class="right">{{data.s_time?data.s_time:'-'}}</div>
+			</div>
+			<div class="list f-clear">
+				<div class="left">结束日期：</div>
+				<div class="right">{{data.e_time?data.e_time:'-'}}</div>
+			</div>
 
-		<div class="m-borderTitle"><span>联系电话</span></div>
-		<div class="m-normalList">{{data.phone_mob?data.phone_mob:'-'}}</div>
-		<div class="m-borderTitle"><span>邮箱</span></div>
-		<div class="m-normalList">{{data.email?data.email:'-'}}</div>
+			<div class="list f-clear">
+				<div class="left">总工期天数：</div>
+				<div class="right">{{data.total_periods?data.total_periods:'-'}}</div>
+			</div>
 
-		<div class="m-borderTitle"><span>对方开户银行</span></div>
-		<div class="m-normalList">{{data.deposit_bank?data.deposit_bank:'-'}}</div>
-		<div class="m-borderTitle"><span>对方账户名称</span></div>
-		<div class="m-normalList">{{data.corporate_name?data.corporate_name:'-'}}</div>
-		<div class="m-borderTitle"><span>对方银行账号</span></div>
-		<div class="m-normalList">{{data.corporate?data.corporate:'-'}}</div>
+			<div class="list f-clear">
+				<div class="left">合同总金额：</div>
+				<div class="right">{{data.total_price?data.total_price:'-'}}</div>
+			</div>
+			<div class="list f-clear">
+				<div class="left">合同预付款：</div>
+				<div class="right">{{data.prepay?data.prepay:'-'}}</div>
+			</div>
+			<div class="list f-clear">
+				<div class="left">合同尾款：</div>
+				<div class="right">{{data.final?data.final:'-'}}</div>
+			</div>
+
+			<div class="list f-clear">
+				<div class="left">发票类型：</div>
+				<div class="right">{{data.invoice_type?data.invoice_type:'-'}}</div>
+			</div>
+			<div class="list f-clear">
+				<div class="left">发票税率：</div>
+				<div class="right">{{data.invoice_per?data.invoice_per:'-'}}</div>
+			</div>
+
+			<div class="list f-clear">
+				<div class="left">法人代表：</div>
+				<div class="right">{{data.representative?data.representative:'-'}}</div>
+			</div>
+
+			<div class="list f-clear">
+				<div class="left">联系电话：</div>
+				<div class="right">{{data.phone_mob?data.phone_mob:'-'}}</div>
+			</div>
+			<div class="list f-clear">
+				<div class="left">邮箱：</div>
+				<div class="right">{{data.email?data.email:'-'}}</div>
+			</div>
+
+			<div class="list f-clear">
+				<div class="left">对方开户银行：</div>
+				<div class="right">{{data.deposit_bank?data.deposit_bank:'-'}}</div>
+			</div>
+			<div class="list f-clear">
+				<div class="left">对方账户名称：</div>
+				<div class="right">{{data.corporate_name?data.corporate_name:'-'}}</div>
+			</div>
+			<div class="list f-clear">
+				<div class="left">对方银行账号：</div>
+				<div class="right">{{data.corporate?data.corporate:'-'}}</div>
+			</div>
+
+		</div>
+		<!--合同主体信息-->
 
 		<div class="m-borderTitle"><span>合同照片</span></div>
 		<div class="m-listRow g-mt0">
@@ -69,9 +137,25 @@
 					<div class="wrap" v-for="items in data.img_url" :key="items" v-if="data.img_url.length">
 						<img :src="host + '/' + items" alt="" preview="0">
 					</div>
+					<!-- <div class="wrap s-add" :class="{'z-loading':loading.img}">
+						<input type="file" @change="imgUpload($event)">
+						<span class="add">+</span>
+						<img class="loading" :src="temp + '/wap/public/img/loading.gif'" >
+					</div> -->
 				</div>
 			</div>
 		</div>
+
+        <div style="height:1.8rem;"></div>
+        <div class="m-bottom">
+            <div class="block">
+                <!-- <router-link to="/project/projectAdd" class="btn" @click="submit">提交</router-link> -->
+                <a href="javascript:;" class="btn u-FU_btn" :class="{'z-loading':loading.img}">
+					<input type="file" @change="imgUpload($event)">
+                	上传图片<span class="p-loading"></span>
+                </a>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -81,8 +165,11 @@ export default {
   name: 'contractDetails',
   data () {
     return {
-      host:this.$store.state.httpUrl.HOST,
-		data:{},
+		host:this.$store.state.httpUrl.HOST,
+	  	temp:this.$store.state.httpUrl.temp,
+		data:{
+			file_url:[]
+		},
 		invoice_type:[
 			{},
 			{
@@ -101,12 +188,16 @@ export default {
 				type:4,
 				name:"其他"
 			},
-		]
+		],
+		loading:{
+			form:false,
+			img:false
+		}
     }
   },
   created(){
-    var vm = this;
-    vm.getData()
+	var vm = this;
+    vm.getData();
   },
   methods:{
     getData(){
@@ -116,28 +207,151 @@ export default {
 
 		vm.ajax.post(url)
 		.then((res) => {
-		//console.log(res.data)
-		var data = res;
-		if (data.code >= 1) {
-			var _data = data.retval.contractDetailsData;
-			for(var i in _data){
-				vm.$set(vm.data,i,_data[i])
+			var data = res;
+			if (data.code >= 1) {
+				var _data = data.retval.contractDetailsData;
+				for(var i in _data){
+					vm.$set(vm.data,i,_data[i])
+				}
+
+			}else{
+				vm.F['Hint'](vm,{
+					ct:data.msg
+				})
 			}
 
-		}else{
-			vm.F['Hint'](vm,{
-				ct:data.msg
-			})
-		}
-
-		setTimeout(() => {
-			vm.$previewRefresh();
-		},1000);
+			setTimeout(() => {
+				vm.$previewRefresh();
+			},1000);
 		})
     },
     unixFormat(timestamp){
 		var vm = this;
 		return vm.F['unixFormat'](timestamp).split(' ')[0]
+	},
+	fileType(fileUrl){
+		var vm = this;
+		return vm.F['fileType'](fileUrl,vm.temp)
+	},
+    imgUpload(e){
+        var vm = this;
+        var dom = e.target;
+        //console.log(dom)
+        var opt = {
+            limit:10240,
+            url:vm.$store.state.httpUrl.imgUpload,	//上传地址,
+            key:"anoa",	//key值
+            afterCall:vm.afterUpload,
+            beforeCall:vm.beforeUpload,
+            errCall:vm.errCall
+        }
+        vm.F['imgUpload'](vm,dom,opt)	//	图片上传
+    },
+    beforeUpload(){
+        var vm = this;
+        vm.loading.img = true
+    },
+    afterUpload(data){
+        //console.log(data)
+        var vm = this;
+        vm.loading.form = false
+		if(data.code !== 1) {
+			if (data.code == 1314) {
+				if (data.retval.url) {
+					location.href = data.retval.url;
+				}else{
+					window.location.reload();
+				}
+				
+			} else {
+				vm.F['Hint'](vm,{
+					ct:data.msg
+				})
+			}
+
+		} else {
+			vm.data.img_url.push(data.retval.imgUrl)
+			vm.submit()
+		}
+
+        vm.loading.img = false
+    },
+    delImg(index){	//删除图片
+        var vm = this;
+        vm.data.img_url.splice(index,1)
+	},
+	submit(){
+		var vm = this;
+		var postData = {};
+
+		postData.contract_name = vm.data.contract_name;
+		postData.contract_number = vm.data.contract_number;
+		postData.corporate = vm.data.corporate;
+		postData.corporate_name = vm.data.corporate_name;
+		postData.deposit_bank = vm.data.deposit_bank;
+		postData.e_time = +vm.data.e_time;
+		postData.email = vm.data.email;
+		postData.final = vm.data.final;
+		postData.invoice_per = vm.data.invoice_per;
+		postData.invoice_type = vm.data.invoice_type;
+		postData.owner = vm.data.owner;
+		postData.owner_man = vm.data.owner_man;
+		postData.owner_man_tel = vm.data.owner_man_tel;
+		postData.phone_mob = vm.data.phone_mob;
+		postData.prepay = vm.data.prepay;
+		postData.pro_id = vm.data.pro_id;
+		postData.pro_id = vm.data.pro_id;
+		postData.representative = vm.data.representative;
+		postData.s_time = +vm.data.s_time;
+		postData.second = vm.data.second;
+		postData.second_man = vm.data.second_man;
+		postData.second_man_tel = vm.data.second_man_tel;
+		postData.sign_time = +vm.data.sign_time;
+		postData.total_periods = vm.data.total_periods;
+		postData.total_price = vm.data.total_price;
+		postData.id = vm.$route.params.cId
+
+		//文件数组重组（字段名与后台不同，需要特殊处理）
+		postData.fileUrls = []
+		if (vm.data.file_url.length) {
+			for (let index = 0; index < vm.data.file_url.length; index++) {
+				var _obj = {
+					fileName:vm.data.file_url[index].file_name + '.' + vm.data.file_url[index].file_url.split('.')[1],
+					fileUrl:vm.data.file_url[index].file_url
+				}
+				postData.fileUrls.push(_obj)
+			}
+		}
+
+		//图片重组
+		postData.imgUrls = vm.data.img_url;
+
+		vm.loading.img = true
+		vm.ajax.post(this.$store.state.httpUrl.contract.contractAdd,postData)
+		.then(function (res) {
+			//console.log(res.data);
+			var data = res;
+			if (data.code == 1314) {
+				if (data.retval.url) {
+					location.href = data.retval.url;
+				}else{
+					window.location.reload();
+				}
+				
+			} else {
+				vm.F['Hint'](vm,{
+					type:1,
+					ct:data.msg
+				})
+			}
+		})
+		.then(() => {
+			vm.loading.img = false
+		})
+		.catch(function (err) {
+			console.log(err);
+		});
+
 	}
   }
 }
@@ -145,6 +359,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+body{background-color: #fff;}
 /* 合同详情*/
 .m-contractDetails > .txt{position: relative;}
 .m-contractDetails > .txt > .title{height: 0.56rem;font-size: 0.26rem;line-height: 0.56rem;padding-left: 0.32rem;border-bottom: 0.01rem solid #e4e4e5;}
@@ -152,4 +367,14 @@ export default {
 .m-contractDetails > .txt.photo{height: 2.7rem;box-sizing: border-box;}
 .m-contractDetails > .txt.photo > .jpg{background-color: #fff; padding-top: 0.12rem; padding-bottom: 0.22rem;}
 .m-contractDetails > .txt.photo img{display: inline-block; height: 2.22rem; width: 2.16rem; margin: auto 0.14rem; margin-top: 0.1rem; border: 0.01rem solid #dbdbdb; box-sizing: border-box;}
+
+/*合同主体信息*/
+.m-contractContent{padding: 0.34rem 0.38rem 0.46rem; background-color: #71a2e1; color: #fff; font-size: 0.22rem;}
+.m-contractContent > .list{margin-top: 0.3rem; line-height: 1;}
+.m-contractContent > .list > .left{font-size: 0.26rem; float: left;}
+.m-contractContent > .list > .right{margin-left: 1.56rem; line-height: 1.2;}
+
+/*上传图片按钮*/
+.m-bottom .btn{position: relative; font-size: 0.3rem;}
+.m-bottom .btn input{position: absolute; width: 100%; height: 100%; box-sizing: border-box; left: 0; top: 0; z-index: 2; background-color: red; opacity: 0;}
 </style>

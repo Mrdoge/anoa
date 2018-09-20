@@ -2,8 +2,9 @@ let localhostDev = true;
 //如果是本地开发，就把localhostDev 设置成true，连接就是拼成‘http://localhost:8080/api/test’
 //生产环境，就把localhostDev 设置成false，连接就是拼成http://www.gdasjs.com
 //let _host= localhostDev ? 'http://192.168.1.230/BusinessProject/www.anoa.de' : 'http://anoa.xilide.vip';
-let _host= localhostDev ? 'http://192.168.1.230/BusinessProject/www.anoa.de' : 'http://www.gdasjs.com';
+//let _host= localhostDev ? 'http://192.168.1.230/BusinessProject/www.anoa.de' : 'http://www.gdasjs.com';
 //let _host= localhostDev ? 'http://192.168.1.222' : 'http://www.gdasjs.com';  //本地打包测试用
+let _host= localhostDev ? 'http://192.168.1.230/BusinessProject/www.anoa.de' : 'http://oa.gdasjs.com';
 
 //问题中心接口
 const qst = {
@@ -34,9 +35,11 @@ const project = {
     addProjectRecord:_host + '/wap/project/addProjectRecord'   //项目详情
 }
 
+//合同管理
 const contract = {
     contractList:_host + '/wap/Contract/contractList',   //合同列表
     ContractDetails:_host + '/wap/Contract/ContractDetails',   //合同详情
+    contractAdd:_host + '/wap/contract/contractAdd',   //新增合同
 }
 
 //申请

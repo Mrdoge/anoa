@@ -112,5 +112,5 @@ export default {
 /* 合同管理 */
 .m-contractList > .list{box-sizing: border-box;display: block;}
 .m-contractList > .list > .txt{font-size: 0.22rem;color: #b3b3b3;line-height: 0.4rem;margin-top: 0.22rem; margin-left:0.32rem;border-bottom: 0.01rem solid #e9e9e9;padding-bottom: 0.24rem;box-sizing: border-box;}
-.m-contractList > .list > .txt > .title{font-size: 0.26rem;color: #3a3a3a;}
+.m-contractList > .list > .txt > .title{font-size: 0.26rem;color: #3a3a3a; padding-right: 0.1rem;}
 </style>
