@@ -335,6 +335,12 @@ i,.iconfont{font-family: iconfont; font-style: normal;}
 .m-docList > .right .time{font-size: 0.22rem; color: #828181; margin-top: 0.1rem;}
 .m-docList.s-noborder{border-bottom: none;}
 
+/*通用主体信息框*/
+.m-contractContent{padding: 0.34rem 0.38rem 0.46rem; background-color: #71a2e1; color: #fff; font-size: 0.22rem;}
+.m-contractContent > .list{margin-top: 0.3rem; line-height: 1;}
+.m-contractContent > .list > .left{font-size: 0.26rem; float: left;}
+.m-contractContent > .list > .right{margin-left: 1.56rem; line-height: 1.2;}
+
 /*页面进来动画*/
 .no-mode-translate-fade-enter-active, .no-mode-translate-fade-leave-active {
     will-change: transform;

@@ -63,7 +63,9 @@ import myTaskList from '@/page/myIndex/myTaskList'          //代办事务
 import projectList from '@/page/project/projectList'      //项目管理首页
 import projectAdd from '@/page/project/projectAdd'      //新增项目管理页
 import projectDetail from '@/page/project/projectDetail'      //项目详情页
-
+import projectClassify from '@/page/project/projectClassify'      //项目分类（项目列表进去）
+import projectFile from '@/page/project/projectFile'      //项目文件管理
+import projectbaseInfo from '@/page/project/projectbaseInfo'      //项目基本信息详情
 
 //问题中心
 import questionList from '@/page/question/questionList'      //问题中心首页
@@ -504,7 +506,7 @@ export default new Router({
       path: '/project/projectAdd/:proId',
       name: 'projectAdd',
       meta:{
-        index:1.3,
+        index:1.5,
         title:"上传记录"
       },
       component: projectAdd
@@ -513,11 +515,38 @@ export default new Router({
       path: '/project/projectDetail/:pro_id',
       name: 'projectDetail',
       meta:{
-        index:1.2,
+        index:1.4,
         title:"项目详情",
         lastUrl:"/project/projectList"
       },
       component: projectDetail
+    },
+    {
+      path: '/project/projectClassify/:pro_id/:title',
+      name: 'projectClassify',
+      meta:{
+        index:1.3,
+        title:"项目分类",
+      },
+      component: projectClassify
+    },
+    {
+      path: '/project/projectFile/:pro_id/',
+      name: 'projectFile',
+      meta:{
+        index:1.4,
+        title:"文件管理",
+      },
+      component: projectFile
+    },
+    {
+      path: '/project/projectbaseInfo/:pro_id/',
+      name: 'projectbaseInfo',
+      meta:{
+        index:1.4,
+        title:"基本信息",
+      },
+      component: projectbaseInfo
     },
 
     //问题中心

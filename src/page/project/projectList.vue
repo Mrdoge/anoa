@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="m-listImg">
-            <router-link :to="'/project/projectDetail/' + items.pro_id" class="list f-clear" v-for="items in data" :key="items.pro_id">
+            <router-link :to="urlCal(items.pro_id,items.title)" class="list f-clear" v-for="items in data" :key="items.pro_id">
                 <img :src="host + '/' + items.img_url" class="cover">
                 <div class="right">
                     <div class="title f-txtof_2">{{items.title}}</div>
@@ -59,7 +59,12 @@ export default {
             .catch(function (err) {
                 console.log(err);
             });
-        }    
+        },
+        urlCal(pro_id,title){
+            pro_id = pro_id?pro_id:"-";
+            title = title?title:"-"
+            return '/project/projectClassify/' + pro_id + '/' + title
+        }
     }
 }
 </script>

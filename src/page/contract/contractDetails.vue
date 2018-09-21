@@ -2,7 +2,7 @@
     <div>
 		<!--文件循环体-->
 		<template v-if="data.file_url.length">
-			<a :href="host + '/' + items" class="m-docList f-clear" v-for="(items,index) in data.file_url" :key="index + 'file'">
+			<a :href="host + '/' + items.file_url" class="m-docList f-clear" v-for="(items,index) in data.file_url" :key="index + 'file'">
 				<div class="left">
 					<img :src="fileType(items.file_url).icon" alt="">
 				</div>
@@ -197,7 +197,16 @@ export default {
   },
   created(){
 	var vm = this;
-    vm.getData();
+
+	//document.body.style.backgroundColor = "#fff";
+	setTimeout(() => {
+		document.body.style.backgroundColor = "#fff";
+	},40)
+
+	vm.getData();
+  },
+  destroyed(){
+	  document.body.style.backgroundColor = "";
   },
   methods:{
     getData(){
@@ -347,6 +356,9 @@ export default {
 		})
 		.then(() => {
 			vm.loading.img = false
+			setTimeout(() => {
+				vm.$previewRefresh();
+			},1000);
 		})
 		.catch(function (err) {
 			console.log(err);
@@ -359,7 +371,6 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-body{background-color: #fff;}
 /* 合同详情*/
 .m-contractDetails > .txt{position: relative;}
 .m-contractDetails > .txt > .title{height: 0.56rem;font-size: 0.26rem;line-height: 0.56rem;padding-left: 0.32rem;border-bottom: 0.01rem solid #e4e4e5;}
@@ -367,12 +378,6 @@ body{background-color: #fff;}
 .m-contractDetails > .txt.photo{height: 2.7rem;box-sizing: border-box;}
 .m-contractDetails > .txt.photo > .jpg{background-color: #fff; padding-top: 0.12rem; padding-bottom: 0.22rem;}
 .m-contractDetails > .txt.photo img{display: inline-block; height: 2.22rem; width: 2.16rem; margin: auto 0.14rem; margin-top: 0.1rem; border: 0.01rem solid #dbdbdb; box-sizing: border-box;}
-
-/*合同主体信息*/
-.m-contractContent{padding: 0.34rem 0.38rem 0.46rem; background-color: #71a2e1; color: #fff; font-size: 0.22rem;}
-.m-contractContent > .list{margin-top: 0.3rem; line-height: 1;}
-.m-contractContent > .list > .left{font-size: 0.26rem; float: left;}
-.m-contractContent > .list > .right{margin-left: 1.56rem; line-height: 1.2;}
 
 /*上传图片按钮*/
 .m-bottom .btn{position: relative; font-size: 0.3rem;}

@@ -33,7 +33,10 @@ export default {
   },
   created(){
     var vm = this;
-    document.body.style.backgroundColor = "#fff";
+    
+    setTimeout(() => {
+      document.body.style.backgroundColor = "#fff";
+    },40)
 
     vm.getData();
   },

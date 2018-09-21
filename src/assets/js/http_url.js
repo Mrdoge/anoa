@@ -32,7 +32,8 @@ const mySchedule = {
 const project = {
     projectList:_host + '/wap/project/projectList',   //项目列表
     projectDetail:_host + '/wap/project/projectDetail',   //项目详情
-    addProjectRecord:_host + '/wap/project/addProjectRecord'   //项目详情
+    addProjectRecord:_host + '/wap/project/addProjectRecord',   //项目详情上传记录
+    projectFileList:_host + '/wap/project/projectFileList'   //项目文件列表
 }
 
 //合同管理
