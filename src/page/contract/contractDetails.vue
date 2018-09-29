@@ -144,6 +144,10 @@
 					</div> -->
 				</div>
 			</div>
+			<div class="m-nolist" :class="{'z-show':!data.img_url.length}">
+				<img :src="temp + '/wap/public/img/no_data.png'" alt=""><br/>
+				暂无图片
+			</div>
 		</div>
 
         <div style="height:1.8rem;"></div>
@@ -350,7 +354,7 @@ export default {
 			} else {
 				vm.F['Hint'](vm,{
 					type:1,
-					ct:data.msg
+					ct:data.retval.okTip
 				})
 			}
 		})
@@ -382,4 +386,9 @@ export default {
 /*上传图片按钮*/
 .m-bottom .btn{position: relative; font-size: 0.3rem;}
 .m-bottom .btn input{position: absolute; width: 100%; height: 100%; box-sizing: border-box; left: 0; top: 0; z-index: 2; background-color: red; opacity: 0;}
+
+/*暂无数据*/
+.m-nolist{text-align:center; font-size:0.24rem; color:#666; padding:0.2rem 0; display: none;}
+.m-nolist.z-show{display: block;}
+.m-nolist > img{width: 3rem;}
 </style>

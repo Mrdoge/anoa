@@ -263,7 +263,7 @@ export default {
                     tips:"请填写请假时长"
                 },
                 {
-                    val:vm.form.vacationType,
+                    val:vm.form.leaver_type,
                     type:"noNull",
                     tips:"请选择请假类型"
                 },

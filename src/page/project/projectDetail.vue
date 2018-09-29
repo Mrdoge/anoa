@@ -1,34 +1,27 @@
 <template>
     <div>
-        <div class="m-listTitle">项目信息</div>
-        <!--项目名-->
-        <div class="m-list f-clear">
-			<div class="left">项目名</div>
-			<div class="right">
-				<div class="f-txtof">{{data.title}}</div>
+		<template v-if="false">
+			<div class="m-listTitle">项目信息</div>
+			<div class="m-list f-clear">
+				<div class="left">项目名</div>
+				<div class="right">
+					<div class="f-txtof">{{data.title}}</div>
+				</div>
 			</div>
-        </div>
-        <!--项目名-->
-
-        <!--负责人-->
-        <div class="m-list f-clear">
-			<div class="left">负责人</div>
-			<div class="right">
-				<div class="f-txtof">{{data.userName}}</div>
+			<div class="m-list f-clear">
+				<div class="left">负责人</div>
+				<div class="right">
+					<div class="f-txtof">{{data.userName}}</div>
+				</div>
 			</div>
-        </div>
-        <!--负责人-->
-
-        <!--项目地址-->
-        <div class="m-list f-clear">
-			<div class="left">项目地址</div>
-			<div class="right">
-				<div class="f-txtof">{{data.address}}</div>
+			<div class="m-list f-clear">
+				<div class="left">项目地址</div>
+				<div class="right">
+					<div class="f-txtof">{{data.address}}</div>
+				</div>
 			</div>
-        </div>
-        <!--项目地址-->
-
-        <div class="m-listTitle">项目记录</div>
+			<div class="m-listTitle">项目记录</div>
+		</template>
 
         <!--项目记录-->
         <div class="m-projectRecord" v-for="(items,index) in data.recordList" :key="index">
@@ -48,11 +41,14 @@
                 <router-link :to="'/project/projectAdd/' + pro_id" class="btn">上传记录</router-link>
             </div>
         </div>
+
+		<loading :loadingShow="loadingData.loadingShow" :botLineShow="loadingData.botLineShow && data.recordList.length" :noDataShow="!data.recordList.length && !loadingData.loadingShow"></loading>
     </div>
 </template>
 
 <script>
 var qs = require('qs');
+import loading from '@/components/loading'
 export default {
 	name: 'ProjectDetail',
 	data () {
@@ -65,8 +61,16 @@ export default {
 				userName:"",	//负责人
 				address:"",	//地址
 				recordList:[]	//项目记录
-			}
+			},
+			loadingData:{
+				loadingShow:false,  //是否显示加载效果
+				botLineShow:false,   //是否显示到达底部,
+				noDataShow:true     //是否显示没有数据
+			},
 		}
+	},
+	components:{
+		loading
 	},
 	created(){
     this.getData();

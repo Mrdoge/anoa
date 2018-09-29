@@ -245,6 +245,7 @@ export default {
             if (vm.loading) {
                 return false
             }
+
             var verifyData = [
                 {
                     val:vm.form.s_time,
@@ -262,7 +263,7 @@ export default {
                     tips:"请填写请假时长"
                 },
                 {
-                    val:vm.form.vacationType,
+                    val:vm.form.leaver_type,
                     type:"noNull",
                     tips:"请选择请假类型"
                 },
@@ -272,7 +273,7 @@ export default {
                     tips:"请输入请假原因"
                 }
             ]
-
+            
             var verify = vm.F['FormComfirm'](verifyData);
             if (verify.err) {
                 vm.F['Hint'](vm,{

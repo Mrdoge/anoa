@@ -516,7 +516,7 @@ export default new Router({
       name: 'projectDetail',
       meta:{
         index:1.4,
-        title:"项目详情",
+        title:"项目记录",
         lastUrl:"/project/projectList"
       },
       component: projectDetail
