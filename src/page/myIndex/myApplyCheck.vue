@@ -6,8 +6,11 @@
 			<!--单行布局-->
 			<div class="m-normalList" v-if="key != 'cause'" :class="{'s-bt0':key == 'pass_user_name'}">
 				<div class="left">{{lexicon[key]}}</div>
-				<div class="right">
+				<div class="right" v-if="key != 'status'">
 					{{items}}
+				</div>
+				<div class="right" v-if="key == 'status'">
+					<span class="m-label" :class="{'s-green':+items == 2}">{{findStatus(items)}}</span>
 				</div>
 			</div>
 
@@ -55,7 +58,8 @@ export default {
 					nation:"",			//民族
 					phone_mob:"",	//手机号
 					pass_user_id:"",	//审批人ID
-					pass_user_name:""			//审批人姓名
+					pass_user_name:"",			//审批人姓名
+					status:""					//审批状态
 				},
 				/****入职申请 end****/
 
@@ -63,7 +67,8 @@ export default {
 				{
 					cause:"",		//原因
 					pass_user_id:"",	//审批人ID		
-					pass_user_name:""			//审批人姓名
+					pass_user_name:"",			//审批人姓名
+					status:""					//审批状态
 				},
 				/****转正申请 end****/
 
@@ -75,7 +80,8 @@ export default {
 					leaver_name:"", //请假类型
 					cause:"",       //请假原因
 					pass_user_id:"",    //审批人
-					pass_user_name:""			//审批人姓名
+					pass_user_name:"",			//审批人姓名
+					status:""					//审批状态
 				},
 				/****请假申请 end****/
 
@@ -83,7 +89,8 @@ export default {
 				{
 					cause:"",		//原因
 					pass_user_id:"",	//审批人ID
-					pass_user_name:""			//审批人姓名
+					pass_user_name:"",			//审批人姓名
+					status:""					//审批状态
 				},
 				/****离职申请 end****/
 
@@ -94,7 +101,8 @@ export default {
 					s_name:"",	//部门名称
 					sp_id:"",	//职位ID
 					sp_name:"",	//职位名称
-					pass_user_id:""	//审批人ID		
+					pass_user_id:"",	//审批人ID		
+					status:""					//审批状态
 				},
 				/****调动申请 end****/
 
@@ -103,7 +111,8 @@ export default {
 					salary:"",		//调整薪资
 					cause:"",		//原因
 					pass_user_id:"",	//审批人ID
-					pass_user_name:""			//审批人姓名
+					pass_user_name:"",			//审批人姓名
+					status:""					//审批状态
 				}
 				/****调薪申请 end****/
 
@@ -127,9 +136,24 @@ export default {
 				nation:"民族",
 				phone_mob:"手机号",
 				cause:"原因",
-				salary:"调整薪资"
+				salary:"调整薪资",
+				status:"审批状态"
 			},
-			loading:['','',false,false]
+			loading:['','',false,false],
+			status:[
+				{
+					value:1,
+					name:"待审核"
+				},
+				{
+					value:2,
+					name:"已批准"
+				},
+				{
+					value:3,
+					name:"不批准"
+				}
+			]
 		}
 	},
 	created(){
@@ -212,6 +236,18 @@ export default {
 			.then(() => {
 				vm.$set(vm.loading,status,false);
 			})
+		},
+		findStatus(status){
+			var vm = this;
+			var str = ""
+			for (let index = 0; index < vm.status.length; index++) {
+				if (+vm.status[index].value == +status) {
+					str = vm.status[index].name
+					break
+				}
+			}
+
+			return str
 		}
 	}
 }

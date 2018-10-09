@@ -38,9 +38,15 @@
             </div>
         </div>
         <div class="m-normalList f-clear">
+            <div class="left">入职时间</div>
+            <div class="right">
+                {{unixFormat(data.join_time)}}
+            </div>
+        </div>
+        <div class="m-normalList f-clear">
             <div class="left">籍贯</div>
             <div class="right">
-                {{data.registered_addr?data.registered_addr:"-"}}
+                {{data.native?data.native:"-"}}
             </div>
         </div>
         <div class="m-normalList f-clear">
@@ -130,7 +136,7 @@
             </div>
         </div>
         <div class="m-listRow g-mt0">
-            <div class="title">生活照</div>
+            <div class="title">证件照</div>
             <div class="ct">
                 <div class="imgList">
                     <div class="wrap" v-for="(items,index) in data.shImgData" :key="index">
@@ -182,7 +188,8 @@ export default {
 				s_name:"",				//部门名
 				sp_name:"",				//职位名
 				gender:"",				//性别
-				birth_time:"",			//出生日期
+                birth_time:"",			//出生日期
+                join_time:"",           //入职时间
 				native:"",				//籍贯
 				ethnic:"",				//民族
                 phone_mob:"",			//手机号
