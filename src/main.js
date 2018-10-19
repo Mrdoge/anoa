@@ -22,7 +22,7 @@ import ajax from './assets/js/ajax'   //自己封装的axios方法
 import httpUrl from './assets/js/http_url.js'
 
 //更新缓存方法
-import storageUpdate from './assets/js/storageUpdate'
+//import storageUpdate from './assets/js/storageUpdate'
 
 Vue.config.productionTip = false
 Vue.use(VueAxios,axios)
@@ -35,7 +35,7 @@ Vue.use(VueLazyLoad,{
 //Vue.use(imageClipper)
 Vue.prototype.F = F
 Vue.prototype.ajax = ajax
-Vue.prototype.storageUpdate = storageUpdate
+//Vue.prototype.storageUpdate = storageUpdate
 window.lrz = lrz
 
 //个人中心我的申请图标

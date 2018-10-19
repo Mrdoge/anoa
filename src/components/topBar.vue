@@ -5,7 +5,7 @@
             <a href="javascript:;" class="back" @click="goback">
                 <i class="icon-flow icon " ></i>
             </a>
-            <span class="txt">{{this.$store.state.topBarTitle?this.$store.state.topBarTitle:"安顺OA"}}</span>
+            <span class="txt f-txtof">{{this.$store.state.topBarTitle?this.$store.state.topBarTitle:"安顺OA"}}</span>
             <a href="javascript:;"  class="cal" v-show="this.$store.state.isTopCalendarIconShow" @click="toggleCalendar">
                 <i class="icon-riliriqi icon"></i>
             </a>
@@ -70,10 +70,10 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 /* 通用头部导航样式 */
-.m-nav{height:1.1rem; background-color: #4f77aa; position: fixed; top:0; left: 0; color: #fff; font-size: 0.38rem; line-height: 1.18rem; box-sizing: border-box; width: 100%;z-index: 4; transition: all 0.4s ease;}
+.m-nav{height:1.1rem; background-color: #4f77aa; position: fixed; top:0; left: 0; color: #fff; font-size: 0.38rem; line-height: 1.1rem; box-sizing: border-box; width: 100%;z-index: 4; transition: all 0.4s ease;}
 .m-nav > .back {color: #fff; position: absolute; left: 0.17rem;cursor: pointer;}
 .m-nav > .back i{font-size: 0.42rem;}
-.m-nav > .txt{position: absolute; left: 50%; transform: translateX(-50%);}
+.m-nav > .txt{position: absolute; left: 50%; transform: translateX(-50%); width: 5rem; display: block; text-align: center;}
 .m-nav > .cal{font-size: 0.3rem;position: absolute; right: 0.26rem;color: #fff;}
 .m-nav > .cal i{position: absolute; right: 0rem;color: #fff;font-size: 0.42rem;}
 .m-nav.s-hide{transform: translateY(-100%);}

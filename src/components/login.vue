@@ -5,35 +5,33 @@
                 <!--logo-->
                 <img class="logo" :src="temp + '/wap/public/img/logo.png'" alt="">
                 <!--logo end-->
-
-                <!--form-->
-                <div class="form">
-                    <div class="title">
-                        <img class="logo" :src="temp + '/wap/public/img/logo_title.png'" alt="">
-                    </div>
-                    <div class="ct">
-                        <div class="list">
-                            <i class="icon icon-shouji"></i><input type="number" placeholder="请输入手机号" maxlength="11" v-model.number="form.account" @keyup.13="submit">
-                        </div>
-                        <div class="list">
-                            <i class="icon icon-mima"></i><input type="password" placeholder="请输入密码" v-model="form.passWord" @keyup.13="submit">
-                        </div>
-                        <div class="remember">
-                            <label :class="{'z-cur':remember}">
-                                <input type="checkbox" v-model="remember">
-                                记住密码
-                            </label>
-                        </div>                  
-                    </div>
-
-                    <a href="javascript:;" class="btn u-FU_btn" :class="{'z-loading':loading}" :style="{backgroundImage:'url('+temp+'/wap/public/img/login_bg.png)'}" @click="submit">
-                        登录<span class="p-loading"></span>
-                    </a>
-
+                <div class="title">
+                    <img class="logo" :src="temp + '/wap/public/img/logo_title.png'" alt="">
                 </div>
-                <!--form end-->
+            </div>
+            <!--form-->
+            <div class="form">
+                <div class="ct">
+                    <div class="list">
+                        <i class="icon icon-shouji"></i><input type="number" placeholder="请输入手机号" maxlength="11" v-model.number="form.account" @keyup.13="submit">
+                    </div>
+                    <div class="list">
+                        <i class="icon icon-mima"></i><input type="password" placeholder="请输入密码" v-model="form.passWord" @keyup.13="submit">
+                    </div>
+                    <div class="remember">
+                        <label :class="{'z-cur':remember}">
+                            <input type="checkbox" v-model="remember">
+                            记住密码
+                        </label>
+                    </div>                  
+                </div>
+
+                <a href="javascript:;" class="btn u-FU_btn" :class="{'z-loading':loading}" :style="{backgroundImage:'url('+temp+'/wap/public/img/login_bg.png)'}" @click="submit">
+                    登录<span class="p-loading"></span>
+                </a>
 
             </div>
+            <!--form end-->
         </div>
     </div>
 </template>
@@ -180,20 +178,21 @@ export default {
 <style scoped>
 .m-login{position: fixed; width: 100%; height: 100%; background-color: #fff; z-index: 10; top: 0; left: 0;}
 .m-login > .top{position: relative; width: 100%; height: 46%; background-color: #4482d2; background-size: 0.26rem 0.18rem; background-repeat: repeat;}
-.m-login > .top > .logo{width: 2.6rem; height: 0.9rem; margin-top: 0.36rem; margin-left: 0.3rem;}
-.m-login > .top > .form{display: block; position: absolute; height: 4.1rem; box-sizing: border-box; background-color: #fff; box-shadow: 0 0.04rem 0.06rem 0.02rem rgba(0, 0, 0, 0.2); border-radius: 0.2rem; position: absolute; left: 0.5rem; right: 0.5rem; bottom: -2rem; padding: 0.64rem 0.6rem;}
+.m-login > .top > .logo{width: 2.6rem; height: 0.9rem; top: 0.36rem; left: 0.3rem; position: absolute;}
+.m-login > .top .title{position: absolute; left: 0.5rem; right: 0.5rem; top: 2.4rem;}
+.m-login .form{display: block; position: relative; height: 4.1rem; box-sizing: border-box; background-color: #fff; box-shadow: 0 0.04rem 0.06rem 0.02rem rgba(0, 0, 0, 0.2); border-radius: 0.2rem; margin: 0 0.5rem; padding: 0.64rem 0.6rem; top: -1.9rem;}
 
-.m-login > .top > .form .title{position: absolute; width: 100%; top: -1.12rem; left: 0; right: 0;}
-.m-login > .top > .form .ct .list{position: relative; margin-top: 0.44rem; border-radius: 0.1rem; background-color: #ebebeb; border-left: 0.06rem solid #4482d2;}
-.m-login > .top > .form .ct .list:first-child{margin-top: 0;}
-.m-login > .top > .form .ct .list input{height: 0.94rem; display: block; box-sizing: border-box; width: 100%; padding-left: 0.8rem; border: none; color: #4482d2; font-size: 0.28rem; background-color: transparent;}
-.m-login > .top > .form .ct .list i{position: absolute; font-size: 0.4rem; color: #4482d2; top: 50%; left: 0.3rem; transform: translateY(-50%);}
+/* .m-login .form .title{position: absolute; width: 100%; top: -1.12rem; left: 0; right: 0;} */
+.m-login .form .ct .list{position: relative; margin-top: 0.44rem; border-radius: 0.1rem; background-color: #ebebeb; border-left: 0.06rem solid #4482d2;}
+.m-login .form .ct .list:first-child{margin-top: 0;}
+.m-login .form .ct .list input{height: 0.94rem; display: block; box-sizing: border-box; width: 100%; padding-left: 0.8rem; border: none; color: #4482d2; font-size: 0.28rem; background-color: transparent;}
+.m-login .form .ct .list i{position: absolute; font-size: 0.4rem; color: #4482d2; top: 50%; left: 0.3rem; transform: translateY(-50%);}
 
-.m-login > .top > .form .ct .remember{margin-top: 0.4rem;}
-.m-login > .top > .form .ct .remember input{box-sizing: border-box; display: inline-block; width: 0.3rem; height: 0.3rem; vertical-align: middle; position: relative; z-index: 2; cursor: pointer; opacity: 0; margin-right: 0.06rem;}
-.m-login > .top > .form .ct .remember label{position: relative; cursor: pointer;}
-.m-login > .top > .form .ct .remember label:before{content: ""; display: inline-block; border: 0.01rem solid #dbdbdb; width: 0.3rem; height: 0.3rem; border-radius: 0.04rem; position: absolute; left: 0; top: 0; top: 50%; transform: translateY(-50%);}
-.m-login > .top > .form .ct .remember label.z-cur:before{background-color: #4583d4;}
+.m-login .form .ct .remember{margin-top: 0.4rem;}
+.m-login .form .ct .remember input{box-sizing: border-box; display: inline-block; width: 0.3rem; height: 0.3rem; vertical-align: middle; position: relative; z-index: 2; cursor: pointer; opacity: 0; margin-right: 0.06rem;}
+.m-login .form .ct .remember label{position: relative; cursor: pointer;}
+.m-login .form .ct .remember label:before{content: ""; display: inline-block; border: 0.01rem solid #dbdbdb; width: 0.3rem; height: 0.3rem; border-radius: 0.04rem; position: absolute; left: 0; top: 0; top: 50%; transform: translateY(-50%);}
+.m-login .form .ct .remember label.z-cur:before{background-color: #4583d4;}
 
-.m-login > .top > .form > .btn{display: block; height: 0.84rem; line-height: 0.84rem; background-color: #4583d4; position: absolute; font-size: 0.3rem; width: 100%; left: 0; box-sizing: border-box; bottom: -1.68rem; background-size: 0.26rem 0.18rem; background-repeat: repeat;}
+.m-login .form > .btn{display: block; height: 0.84rem; line-height: 0.84rem; background-color: #4583d4; position: absolute; font-size: 0.3rem; width: 100%; left: 0; box-sizing: border-box; bottom: -1.68rem; background-size: 0.26rem 0.18rem; background-repeat: repeat;}
 </style>

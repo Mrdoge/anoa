@@ -100,7 +100,7 @@ export default {
 		getData(){
 			var vm = this;
 			var url = vm.$store.state.httpUrl.member.getMemberInfo;
-            //var userId = localStorage.getItem('userId')
+            
             var userInfo = JSON.parse(localStorage.getItem('userInfo'))
             if (userInfo) {
                 for (var i in userInfo){
@@ -111,9 +111,18 @@ export default {
                     }
                 }
             }else{
-                vm.storageUpdate()
+                //vm.storageUpdate()
+                //没办法，只能从新登陆了，连userId都没了，很容易引发BUG
+                vm.F['Hint'](vm,{
+                    ct:"登陆失效，请从新登陆"
+                })
+                
+                vm.$store.state.isLogin = false;
+                //清除所有缓存
+                localStorage.clear();
             }
             
+            //var userId = localStorage.getItem('userId')
 			// var postData = {
 			// 	userId:userId,
 			// 	type:[1]

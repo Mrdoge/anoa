@@ -375,7 +375,8 @@ export default {
                     vm.data.avatar = vm.avatarUrl
                     
                     //个人资料已变动，需要重新写入缓存
-                    vm.storageUpdate();
+                    //vm.storageUpdate();
+                    vm.setLocaltUserInfo('avatar',vm.avatarUrl)
                 }else{
                     vm.F['Hint'](vm,{
                         ct:data.msg
@@ -399,13 +400,17 @@ export default {
 			.then((res) => {
 				var data = res;
 				if (data.code >= 1) {
-					var _data = data.retval.data
+                    var _data = data.retval.data;
 					for (var i in _data){
 						for (var j in vm.data){
 							if (i == j) {
 								vm.data[j] = _data[i]
 							}
-						}
+                        }
+                        
+                        //写入缓存（更新缓存现有数据）
+                        vm.setLocaltUserInfo(i,_data[i])
+
 					}
 					
 				}else{
@@ -589,7 +594,10 @@ export default {
                         })
 
                         //个人资料已变动，需要重新写入缓存
-                        vm.storageUpdate();
+                        //vm.storageUpdate();
+                        for(var i in postData.userData){
+                            vm.setLocaltUserInfo(i,postData.userData[i])
+                        }
 
                         // setTimeout(() => {
                         //     window.location.reload();
@@ -605,6 +613,12 @@ export default {
                     }
                     vm.loading = false
                 })
+        },
+        setLocaltUserInfo(key,value){
+            var userInfo = JSON.parse(localStorage.getItem('userInfo'));
+            userInfo[key] = value
+            userInfo = JSON.stringify(userInfo)
+            localStorage.setItem('userInfo',userInfo)
         }
         
 	}

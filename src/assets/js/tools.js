@@ -726,6 +726,12 @@ F['fileType'] = function(fileUrl,temp){
     if (fileUrl.indexOf('txt') > -1) {
         obj.icon = temp + '/wap/public/img/txt.png'
     }
+    if (fileUrl.indexOf('pdf') > -1) {
+        obj.icon = temp + '/wap/public/img/pdf.png'
+    }
+    if (fileUrl.indexOf('jpg') > -1 || fileUrl.indexOf('jpeg') > -1 || fileUrl.indexOf('png') > -1 || fileUrl.indexOf('bmp') > -1 || fileUrl.indexOf('gif') > -1) {
+        obj.icon = temp + '/wap/public/img/img.png'
+    }
 
     obj.filetype = fileUrl.split('.')[1];
     return obj

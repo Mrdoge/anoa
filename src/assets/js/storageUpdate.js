@@ -1,6 +1,7 @@
 /*
 created by lkh 2018-8-9
 更新缓存
+2018-10-19已废弃（更新数据依赖缓存中的用户名和密码。用户有时候选择不记住密码则会促发回到登录页的BUG）
 */
 import qs from 'qs'
 import axios from 'axios'
