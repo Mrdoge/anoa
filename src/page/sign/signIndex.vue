@@ -21,7 +21,7 @@
         <div id="tip" style="margin-top: 1rem; margin-bottom: 0.2rem; font-size: 0.26rem; display: none;"></div>
 
         <div id="allmap"></div>
-        <mapPicker :isShow="showPicker" :callback="setAddress" :cancel="cancel"></mapPicker>
+        <mapPicker :isShow="showPicker" :callback="setAddress" :cancel="cancel" :lat="lat" :lng="lng"></mapPicker>
     </div>
 </template>
 
@@ -41,7 +41,9 @@ export default {
             district:"",
             serverTime:"",    //服务器时间
             loading:true,      //获取地址中
-            showPicker:false
+            showPicker:false,
+            lat:"",             //经度
+            lng:""              //纬度
         }
     },
     created(){
@@ -57,15 +59,19 @@ export default {
         //     console.log(e)
         //     //alert('您选择了:' + e.data.name + ',' + e.data.location)
         // }, false);
+        setTimeout(() => {
+            if (localStorage.getItem('fromType') == "miniProgram") {
+                vm.getLocationByTencentMiniProgram()
+            }else{
+                //vm.getLocationByGaoDe()            //高德地图
+                //vm.getLocationByBaiDu()            //百度地图
+                vm.getLocationByTencent()           //腾讯地图                
+            }
 
+        },500);
     },
     mounted(){
         var vm = this;
-        setTimeout(() => {
-            //vm.getLocationByGaoDe()            //高德地图
-            //vm.getLocationByBaiDu()            //百度地图
-            vm.getLocationByTencent()           //腾讯地图
-        },500);
     },
     destroyed(){
         document.body.style.height = ""
@@ -261,45 +267,72 @@ export default {
             var script = document.createElement("script");  
             //script.src = "https://map.qq.com/api/js?v=2.exp&key=URKBZ-BHWKG-M5LQQ-IMA7D-SOZGS-IZBJ4";       //URKBZ-BHWKG-M5LQQ-IMA7D-SOZGS-IZBJ4
             //script.src = "https://apis.map.qq.com/tools/geolocation/min?key=URKBZ-BHWKG-M5LQQ-IMA7D-SOZGS-IZBJ4&referer=myapp"
-            script.src = "https://3gimg.qq.com/lightmap/components/geolocation/geolocation.min.js"
-            document.body.appendChild(script);
-
-            script.onload = () => {
-                var geolocation = new qq.maps.Geolocation("URKBZ-BHWKG-M5LQQ-IMA7D-SOZGS-IZBJ4", "anoa");
-                var positionNum = 0
-                var options = {timeout: 8000};
-                geolocation.getLocation(showPosition,showErr,options)
-
-                function showPosition(position) {
-                    var adCode = position.adCode;//邮政编码
-                    var nation = position.nation;//中国
-                    var city = position.city; //城市
-                    var addr = position.addr; //详细地址
-                    var lat = position.lat; //
-                    var lng = position.lng; //火星坐标 //TODO 实现业务代码逻辑
-
-                    //var nowPlace = position.addr;
-                    // vm.F['Hint'](vm,{
-                    //     ct:nowPlace
-                    // })
-                    vm.province = position.province
-                    vm.city = position.city
-                    vm.district = position.district
 
 
-                    vm.nowPlace = position.province + position.city + position.addr;
+            //script.src = "https://3gimg.qq.com/lightmap/components/geolocation/geolocation.min.js"
+            //document.body.appendChild(script);
+            // script.onload = () => {
 
-                    vm.loading = false
+            // }
+            var geolocation = new qq.maps.Geolocation("URKBZ-BHWKG-M5LQQ-IMA7D-SOZGS-IZBJ4", "anoa");
+            var positionNum = 0
+            var options = {timeout: 8000};
+            geolocation.getLocation(showPosition,showErr,options)
 
-                }; 
-                function showErr() { 
-                    //TODO 如果出错了调用此方法
-                    vm.F['Hint'](vm,{
-                        ct:"定位失败"
-                    })
-                };
+            function showPosition(position) {
+                var adCode = position.adCode;//邮政编码
+                var nation = position.nation;//中国
+                var city = position.city; //城市
+                var addr = position.addr; //详细地址
+                var lat = position.lat; //
+                var lng = position.lng; //火星坐标 //TODO 实现业务代码逻辑
+
+                //var nowPlace = position.addr;
+                // vm.F['Hint'](vm,{
+                //     ct:nowPlace
+                // })
+                
+                vm.province = position.province
+                vm.city = position.city
+                vm.district = position.district
+
+                vm.nowPlace = position.province + position.city + position.addr;
+
+                vm.loading = false
+
+            }; 
+            function showErr(msg) {
+                //TODO 如果出错了调用此方法
+                vm.F['Hint'](vm,{
+                    ct:"定位失败"
+                })
+            };
+
+        },
+        getLocationByTencentMiniProgram(){  //小程序情况获取坐标
+            var vm = this;
+            var location = localStorage.getItem('location');
+            //console.log(location)
+            if (!location || location == "undefined") {
+                vm.getLocationByTencent()
+                return false
             }
+            location = new vm.F['base64']().decode(localStorage.getItem('location'));
+            location = JSON.parse(location);
+            location = location.result;
+            //location = JSON.parse(location)
+            //var myLatLng = new qq.maps.LatLng(location.latitude,location.longitude);
+            //console.log(location)
+            //设置经纬度
+            vm.lat = location.location.lat
+            vm.lng = location.location.lng
 
+            vm.province = location.address_component.province
+            vm.city = location.address_component.city
+            vm.district = location.address_component.district
+
+            vm.nowPlace = location.address_component.province + location.address_component.city + location.address_component.district + location.address_component.street + location.address_component.street_number;
+            vm.loading = false
         },
         setAddress(data){
             var vm = this;

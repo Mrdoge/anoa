@@ -1,8 +1,9 @@
 <template>
     <div class="m-mapPicker" v-show="isShow">
         <!-- <iframe src="https://m.amap.com/picker/?center=116.3972,39.9696&key=608d75903d29ad471362f8c58c550daf" frameborder="0" scrolling="no" name="mainContent" id="iframepage"></iframe> -->
-        <iframe id="mapPage" width="100%" height="100%" frameborder=0 src="https://apis.map.qq.com/tools/locpicker?search=0&type=1&mapdraggable=0&radius=300&key=OB4BZ-D4W3U-B7VVO-4PJWW-6TKDJ-WPB77&referer=anoa"></iframe>
+        <iframe id="mapPage" width="100%" height="100%" frameborder=0 src="https://apis.map.qq.com/tools/locpicker?search=0&type=1&mapdraggable=0&radius=300&key=OB4BZ-D4W3U-B7VVO-4PJWW-6TKDJ-WPB77&referer=anoa" v-if="!lat"></iframe>
 
+        <iframe id="mapPage" width="100%" height="100%" frameborder=0 :src="'https://apis.map.qq.com/tools/locpicker?search=0&type=1&mapdraggable=0&radius=300&key=OB4BZ-D4W3U-B7VVO-4PJWW-6TKDJ-WPB77&referer=anoa' + '&coord=' + lat + ',' + lng" v-if="lat"></iframe>
         <!-- 底边 -->
         <div class="m-forbotNav" style="height: 2rem;"></div>
         <div class="m-bottom">
@@ -24,7 +25,7 @@ name: 'mapPicker',
             loc:{}
         }
     },
-    props:['isShow','callback','cancel'],
+    props:['isShow','callback','cancel','lat','lng'],
     created(){
         // (function(){
         //     var iframe = document.getElementById('iframepage').contentWindow;
