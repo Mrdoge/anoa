@@ -172,6 +172,8 @@ window.vueApp = new Vue({
 
       //修一下链接（无刷新）
       history.replaceState('',null,'/');
+    }else{
+      localStorage.setItem('fromType','');
     }
   }
 })
