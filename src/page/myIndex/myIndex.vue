@@ -94,10 +94,10 @@ export default {
     },
     created(){
         var vm = this;
-        vm.getData();
+        vm.setData();
     },
 	methods:{
-		getData(){
+		setData(){
 			var vm = this;
 			var url = vm.$store.state.httpUrl.member.getMemberInfo;
             
@@ -110,6 +110,9 @@ export default {
                         }
                     }
                 }
+
+                //每次进来都要实时更新最新头像
+                vm.getUserInfo(userInfo.user_id)
             }else{
                 //vm.storageUpdate()
                 //没办法，只能从新登陆了，连userId都没了，很容易引发BUG
@@ -122,35 +125,31 @@ export default {
                 localStorage.clear();
             }
             
-            //var userId = localStorage.getItem('userId')
-			// var postData = {
-			// 	userId:userId,
-			// 	type:[1]
-            // }
+        },
+        getUserInfo(userId){
+            var vm = this;
+            var url = vm.$store.state.httpUrl.member.getMemberInfo;
+			var postData = {
+				userId:userId,
+				type:[1]
+            }
             
-			// vm.ajax.post(url,postData)
-			// .then((res) => {
-			// 	var data = res;
-			// 	if (data.code >= 1) {
-			// 		var _data = data.retval.data
-			// 		for (var i in _data){
-			// 			for (var j in vm.data){
-			// 				if (i == j) {
-			// 					vm.data[j] = _data[i]
-			// 				}
-			// 			}
-			// 		}
-			// 	}else{
-			// 		vm.F['Hint'](vm,{
-			// 			ct:data.msg
-			// 		})
-			// 	}
-
-			// 	setTimeout(() => {
-			// 		vm.$previewRefresh()
-			// 	},1000);
-			// })
-		},
+			vm.ajax.post(url,postData)
+			.then((res) => {
+				var data = res;
+				if (data.code >= 1) {
+					var _data = data.retval.data
+                    vm.data.avatar = _data.avatar
+				}else{
+					vm.F['Hint'](vm,{
+						ct:data.msg
+					})
+				}
+				setTimeout(() => {
+					vm.$previewRefresh()
+				},1000);
+			})
+        },
 		unixFormat(timestamp){
             var vm = this;
 			if (!timestamp) {

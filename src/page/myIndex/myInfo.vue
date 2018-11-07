@@ -334,30 +334,43 @@ export default {
                 key:'anoa',
                 imgResour:dataURL
             }
-            $.ajax({
-                url: url,
-                dataType: 'json',
-                type: "post",
-                data: postdata,
-                success: function(data) {
-                    if(data.code >= 1){
-                        vm.avatarUrl = data.retval.imgUrl
-                        vm.isShowCrop = false
-                        vm.avatarSubmit()
+            vm.ajax.post(url,postdata)
+            .then(function(data){
+                if(data.code >= 1){
+                    vm.avatarUrl = data.retval.imgUrl
+                    vm.isShowCrop = false
+                    vm.avatarSubmit()
 
-                    }else{
-                        vm.F['Hint'](vm,{
-                            ct:data.msg
-                        })
-                    }
-                },
-                error:function(err){
-                    console.log('连接超时')
-                },
-                complete:function(){
-                    
+                }else{
+                    vm.F['Hint'](vm,{
+                        ct:data.msg
+                    })
                 }
             })
+            // $.ajax({
+            //     url: url,
+            //     dataType: 'json',
+            //     type: "post",
+            //     data: postdata,
+            //     success: function(data) {
+            //         if(data.code >= 1){
+            //             vm.avatarUrl = data.retval.imgUrl
+            //             vm.isShowCrop = false
+            //             vm.avatarSubmit()
+
+            //         }else{
+            //             vm.F['Hint'](vm,{
+            //                 ct:data.msg
+            //             })
+            //         }
+            //     },
+            //     error:function(err){
+            //         console.log('连接超时')
+            //     },
+            //     complete:function(){
+                    
+            //     }
+            // })
         },
         avatarSubmit(){
             var vm = this;

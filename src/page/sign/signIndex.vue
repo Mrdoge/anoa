@@ -59,16 +59,15 @@ export default {
         //     console.log(e)
         //     //alert('您选择了:' + e.data.name + ',' + e.data.location)
         // }, false);
-        setTimeout(() => {
-            if (localStorage.getItem('fromType') == "miniProgram") {
-                vm.getLocationByTencentMiniProgram()
-            }else{
+        if (localStorage.getItem('fromType') == "miniProgram") {
+            vm.getLocationByTencentMiniProgram()
+        }else{
+            setTimeout(() => {
                 //vm.getLocationByGaoDe()            //高德地图
                 //vm.getLocationByBaiDu()            //百度地图
-                vm.getLocationByTencent()           //腾讯地图                
-            }
-
-        },500);
+                vm.getLocationByTencent()           //腾讯地图
+            },500)           
+        }
     },
     mounted(){
         var vm = this;
@@ -317,7 +316,7 @@ export default {
                 vm.getLocationByTencent()
                 return false
             }
-            location = new vm.F['base64']().decode(localStorage.getItem('location'));
+            location = new vm.F['base64']().decode(location);
             location = JSON.parse(location);
             location = location.result;
             //location = JSON.parse(location)
@@ -330,7 +329,7 @@ export default {
             vm.province = location.address_component.province
             vm.city = location.address_component.city
             vm.district = location.address_component.district
-
+            
             vm.nowPlace = location.address_component.province + location.address_component.city + location.address_component.district + location.address_component.street + location.address_component.street_number;
             vm.loading = false
         },
